@@ -112,24 +112,23 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>16 Jun 2020 08:32:00</td>
-                                  <td>Chin Zhen Yu</td>
-                                  <td>012-3456789</td>
-                                  <td>chinzhenyu97@gmail.conm</td>
-                                  <td>Mohammad Ahmad bin Mohammad Mutu</td>
-                                  <td><button type="submit" class="btn btn-primary">View</button></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td>16 Jun 2020 10:45:12</td>
-                                  <td>Wan Nurwani binti Siti Rosella</td>
-                                  <td>012-3456789</td>
-                                  <td>chinzhenyu97@gmail.conm</td>
-                                  <td>Yap Li Feng</td>
-                                  <td><button type="submit" class="btn btn-primary">View</button></td>
-                                </tr>
+                                <?php
+                                  $items = Transaction::all();
+                                  foreach ($items as $item)
+                                  {
+                                    echo "<tr>";
+                                    echo "<th scope=\"row\">".$item->get_id()."</th>";
+                                    echo "<td>".$item->get_transaction_date()."</td>";
+                                    echo "<td>".$item->get_name()."</td>";
+                                    echo "<td>".$item->get_contact_no()."</td>";
+                                    echo "<td>".$item->get_email()."</td>";
+                                   
+                                    $staff = Staff::find("id=".$item->get_staff_id());
+                                    echo "<td>".$staff->get_name()."</td>";
+                                    echo "<td><button type='submit' name='view_detail' class='btn btn-primary'>View</button></td>";
+                                    echo "</tr>";
+                                  }
+                                ?>
                               </tbody>
                             </table>
                           </div>
