@@ -89,7 +89,7 @@
             </li>
             <li class="sidebar-list-item">
               <a
-                href="addtransaction.php"
+                href="#"
                 class="sidebar-link text-muted pl-lg-5"
                 >Manage Collectors</a
               >
@@ -97,7 +97,7 @@
 
             <li class="sidebar-list-item">
               <a
-                href="addtransaction.php"
+                href="#"
                 class="sidebar-link text-muted pl-lg-5"
                 >Manage Staff</a
               >

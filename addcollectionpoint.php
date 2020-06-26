@@ -1,4 +1,17 @@
 <!DOCTYPE html>
+<?php 
+  session_start();
+  require_once './database.php';
+  if (!isset($_SESSION["user"]))
+  {
+    echo "<script type='text/javascript'>location.href = 'login.php';</script>";
+  }
+  else
+  {
+    $user = $_SESSION["user"];
+  }
+?>
+
 <html>
   <head>
     <meta charset="utf-8" />
@@ -84,13 +97,15 @@
                           >Phone No.</label
                         >
                         <div class="col-md-9">
-                          <input
+                        <input
                              name="phone"
                             type="text"
                             placeholder="Insert phone no"
                             class="form-control"
                           />
                         </div>
+                      </div>
+
                       <div class="form-group row">
                       <label class="col-md-2 form-control-label">Social Media Tag</label>
                       <div class="col-md-9">
@@ -106,16 +121,6 @@
                             name="fax"
                             type="text"
                             placeholder="Insert fax no."
-                            class="form-control"
-                          />
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-md-2 form-control-label">City</label>
-                        <div class="col-md-9">
-                          <input
-                            type="text"
-                            placeholder="Insert city"
                             class="form-control"
                           />
                         </div>

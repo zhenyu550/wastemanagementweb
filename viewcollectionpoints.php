@@ -61,7 +61,7 @@
                   <h3 class="h6 text-uppercase mb-0">View Collection Points</h3>
                 </div>
                 <div class="card-body">
-                  <form class="form-horizontal" action="addcollectionpoint.php">
+                  <form class="form-horizontal" method="post" action="addcollectionpoint.php">
                     <div class="form-group row">
                       <label class="col-md-2 form-control-label">Branch Name</label>
                       <div class="col-md-9">
@@ -80,7 +80,7 @@
                     <div class="form-group row">
                       <label class="col-md-2 form-control-label">State</label>
                       <div class="col-md-9 select mb-3">
-                        <select name="account" class="form-control">
+                        <select name="state" class="form-control">
                           <option>ALL</option>
                           <option>Johor</option>
                           <option>Kedah</option>
@@ -130,7 +130,25 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
+                                <?php 
+                                  $items = Collection_Point::all();
+                                  foreach($items as $item)
+                                  {
+                                    echo "<tr>";
+                                    echo "<th scope=\"row\">".$item->get_id()."</th>";
+                                    echo "<td>".$item->get_name()."</td>";
+                                    echo "<td>".$item->get_address()."</td>";
+                                    echo "<td>".$item->get_phone_no()."</td>";
+                                    echo "<td>".$item->get_fax_no()."</td>";
+                                    echo "<td>".$item->get_social_media_tag()."</td>";
+                                    echo "<td>".$item->get_state()."</td>";
+                                    echo "<td><button type='submit' class='btn btn-primary' name='Edit_".$item->get_id()."'>Edit</button></td>";
+                                    echo "<td><button type='submit' class='btn btn-primary' name='Delete".$item->get_id()."'>Delete</button></td>";
+                                    echo "</tr>";
+                                  }
+                                ?>
+
+                                <!-- <tr>
                                   <th scope="row">1</th>
                                   <td>HQ</td>
                                   <td>No. 1 & 3, Jalan KF4,Kota Fesyen – MITC, Hang Tuah Jaya, 75450 Ayer Keroh, Melaka</td>
@@ -151,7 +169,7 @@
                                   <td>Selangor</td>
                                   <td><button type="submit" class="btn btn-primary">Edit</button></td>
                                   <td><button type="submit" class="btn btn-primary">Delete</button></td>
-                                </tr>
+                                </tr> -->
                               </tbody>
                             </table>
                           </div>
