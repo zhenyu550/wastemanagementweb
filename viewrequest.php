@@ -99,49 +99,86 @@
                                             <th>Contact No</th>
                                             <th>Waste Type</th>
                                             <th>Address</th>
-                                            <th>Postcode</th>
-                                            <th>City</th>
-                                            <th>State</th>
+                                            <th>Collection Point</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>2020-06-17 14:58:02</td>
-                                            <td>Chin Zhen Yuan</td>
-                                            <td>014-6677196</td>
-                                            <td>Paper, Glass</td>
-                                            <td>12, Jalan 123, Taman Gembira, 58200 Kuala Lumpur</td>
-                                            <td>58200</td>
-                                            <td>Kuala Lumpur</td>
-                                            <td>W.P. Kuala Lumpur</td>
-                                            <td>
-                                                <div class="ml-auto">
-                                                    <button type="button" class="btn btn-primary">Pending</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>2020-06-17 14:58:02</td>
-                                            <td>Chin Zhen Yuan</td>
-                                            <td>014-6677196</td>
-                                            <td>Paper, Glass</td>
-                                            <td>12, Jalan 123, Taman Gembira, 58200 Kuala Lumpur</td>
-                                            <td>58200</td>
-                                            <td>Kuala Lumpur</td>
-                                            <td>W.P. Kuala Lumpur</td>
-                                            <td>
-                                                <div class="ml-auto">
-                                                    <button type="button" class="btn btn-primary" disabled>Done</button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <?php
+                                        $items = Pick_Up_Request::all();
+                                        foreach ($items as $item)
+                                        {
+                                            $item_id = $item->get_id();
 
+                                            echo "<tr>";
+                                            echo "<form class='form-horizontal' method='get' action='viewrequest_post.php' name='view_request' >";
+                                            echo "<th scope=''row'>".$item_id."</th>";
+                                            echo "<td>".$item->get_request_date()."</td>";
+                                            echo "<td>".$item->get_name()."</td>";
+                                            echo "<td>".$item->get_contact_no()."</td>";
+
+                                            // Waste Type
+                                            $waste_types_str = $item->get_waste_type();
+                                            
+                                            // Split the waste type
+                                            $waste_types = explode(", ", $waste_types_str);
+
+                                            $wastes_types_names = '';
+
+                                            // Get the name of the type using the id
+                                            for($index = 0; $index < count($waste_types) - 1; $index++)
+                                            {
+                                                $type_name = Waste_Type::find("id=".$waste_types[$index])->get_name();
+                                                // Join the strings
+                                                if($index < count($waste_types) - 2)
+                                                {
+                                                    $wastes_types_names = $wastes_types_names.$type_name.", ";
+                                                }
+                                                else 
+                                                {
+                                                    $wastes_types_names = $wastes_types_names.$type_name;
+                                                }
+                                            }
+
+                                            // Display the string
+                                            echo "<td>".$wastes_types_names."</td>";
+                                            echo "<td>".$item->get_address()."</td>";
+
+                                            $cp_id = $item->get_cp_id();
+                                            $cp = Collection_Point::find("id=".$cp_id);
+                                            $cp_name = $cp->get_name();
+
+                                            echo "<td>".$cp_name."</td>";
+
+                                            echo "<td>";
+                                            echo "<form>";
+                                            echo "<input type='hidden' name='staff_id' value='$user'>";
+                                            echo "<input type='hidden' name='request_id' value='$item_id'>";
+
+                                            echo "<div class='ml-auto'>";
+
+                                            // Check the status, if pending button can be pressed, else cannot
+                                            $status = $item->get_status();
+                                            if($status == "Pending")
+                                            {
+                                                echo "<button type='submit' class='btn btn-primary' formaction='viewrequest_post.php' formmethod='post'>Pending</button>";
+                                            }
+                                            else 
+                                            {
+                                                echo "<button type='button' class='btn btn-primary' disabled>Done</button>";
+                                            }
+                                            echo "</div>";
+                                            echo "</td>";
+
+                                            echo "</form>";
+                                            echo "</tr>";
+
+                                        } 
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
