@@ -54,7 +54,7 @@
                     <h3 class="h6 text-uppercase mb-0">Add Collection Point</h3>
                   </div>
                   <div class="card-body">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="post">
                       <div class="form-group row">
                         <label class="col-md-2 form-control-label">Name</label>
                         <div class="col-md-9">
@@ -152,7 +152,7 @@
                           <button type="submit" class="btn btn-secondary">
                             Reset
                           </button>
-                          <button type="submit" class="btn btn-primary">
+                          <button type="submit" class="btn btn-primary" formaction="addcollectionpoint_post.php">
                             Add Collection Point
                           </button>
                         </div>
