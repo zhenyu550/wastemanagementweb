@@ -59,6 +59,7 @@
                         <label class="col-md-2 form-control-label">Name</label>
                         <div class="col-md-9">
                           <input
+                            name="branch"
                             type="text"
                             placeholder="Insert branch name"
                             class="form-control"
@@ -71,6 +72,7 @@
                         >
                         <div class="col-md-9">
                           <input
+                             name="address"
                             type="text"
                             placeholder="Insert address"
                             class="form-control"
@@ -83,11 +85,17 @@
                         >
                         <div class="col-md-9">
                           <input
+                             name="phone"
                             type="text"
                             placeholder="Insert phone no"
                             class="form-control"
                           />
                         </div>
+                      <div class="form-group row">
+                      <label class="col-md-2 form-control-label">Social Media Tag</label>
+                      <div class="col-md-9">
+                        <input type="text" required name="socmed" required placeholder="Insert @" class="form-control" />
+                      </div>
                       </div>
                       <div class="form-group row">
                         <label class="col-md-2 form-control-label"
@@ -95,6 +103,7 @@
                         >
                         <div class="col-md-9">
                           <input
+                            name="fax"
                             type="text"
                             placeholder="Insert fax no."
                             class="form-control"
@@ -114,7 +123,7 @@
                       <div class="form-group row">
                         <label class="col-md-2 form-control-label">State</label>
                         <div class="col-md-9 select mb-3">
-                          <select name="account" class="form-control">
+                          <select name="state" id="state" class="form-control">
                             <option value="" disabled selected hidden
                               >Select State</option
                             >
