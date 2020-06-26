@@ -4,7 +4,7 @@ require_once "model.php";
 Class Pick_Up_Request extends Model
 {
   const TABLE_NAME = 'pick_up_request';
-  protected $form = ["id" => "int", "name" => "string", "contact_no" => "string", "address" => "string", "waste_type" => "int", "request_date" => "string", "cp_id" => "int"];
+  protected $form = ["id" => "int", "name" => "string", "contact_no" => "string", "address" => "string", "waste_type" => "string", "request_date" => "string", "cp_id" => "int"];
 
   public function __construct()
   {

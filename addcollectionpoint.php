@@ -154,7 +154,7 @@
 
                       <div class="form-group row">
                         <div class="col-md-8 ml-auto">
-                          <button type="submit" class="btn btn-secondary">
+                          <button type="reset" class="btn btn-secondary">
                             Reset
                           </button>
                           <button type="submit" class="btn btn-primary" formaction="addcollectionpoint_post.php">

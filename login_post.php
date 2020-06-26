@@ -19,6 +19,6 @@
     echo '<script language="javascript">';
     echo 'alert("Login failed! Wrong id and password. Please try again")';
     echo '</script>';
-    echo "<script type='text/javascript'>location.href = 'index.php';</script>";
+    echo "<script type='text/javascript'>location.href = 'login.php';</script>";
   }
 ?>

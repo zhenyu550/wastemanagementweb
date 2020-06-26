@@ -4,11 +4,23 @@
   $name = $_POST["name"];
   $phone_no = $_POST["phone_no"];
   $address = $_POST["address"];
-  $waste_type = 0;
-  if (isset($_POST["waste_type_1"])) $waste_type += 1;
-  if (isset($_POST["waste_type_2"])) $waste_type += 10;
-  if (isset($_POST["waste_type_3"])) $waste_type += 100;
-  if (isset($_POST["waste_type_4"])) $waste_type += 1000;
+  $waste_type = "";
+
+
+  if(isset($_POST["waste_types"]))
+  {
+    echo var_dump($_POST["waste_types"]);
+
+    foreach($_POST['waste_types'] as $check) 
+    {
+      $waste_type = $waste_type.$check.", ";
+    }
+  }
+
+  // if (isset($_POST["waste_type_1"])) $waste_type += 1;
+  // if (isset($_POST["waste_type_2"])) $waste_type += 10;
+  // if (isset($_POST["waste_type_3"])) $waste_type += 100;
+  // if (isset($_POST["waste_type_4"])) $waste_type += 1000;
   $branch = $_POST["branch"];
   $date_now = date('Y-m-d H:i:s');
   

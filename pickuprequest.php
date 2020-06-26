@@ -97,7 +97,19 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 form-control-label">Waste Type</label>
                                             <div class="col-md-9">
-                                                <label class="checkbox-inline">
+                                                <?php
+                                                    // Read all waste type from database
+                                                    $items = Waste_Type::all();
+                                                    foreach($items as $item)
+                                                    {
+                                                        echo "<label class='checkbox-inline'>";
+                                                        echo "&emsp;<input name='waste_types[]' id='checkbox_".$item->get_id()."' type='checkbox' value='".$item->get_id()."'>";
+                                                        echo $item->get_name();
+                                                        echo "</label>";
+                                                    }
+
+                                                ?>
+                                                <!-- <label class="checkbox-inline">
                                                     &emsp;<input name="waste_type_1" id="inlineCheckbox1" type="checkbox" value="1">
                                                     Paper
                                                 </label>
@@ -112,7 +124,8 @@
                                                 <label class="checkbox-inline">
                                                     &emsp;&emsp;<input name="waste_type_4" id="inlineCheckbox3" type="checkbox"
                                                         value="1000"> Plasttic
-                                                </label>
+                                                </label> -->
+                                                
                                                 <small class="form-text text-muted ml-3">Please tick the type of waste.</small>
                                             </div>
                                         </div>
