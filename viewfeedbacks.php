@@ -63,20 +63,45 @@
                 <div class="card-body">
                   <form class="form-horizontal">
                     <div class="form-group row">
-                      <label class="col-md-2 form-control-label">Branch</label>
+                      <label class="col-md-2 form-control-label">Branch Name</label>
                       <div class="col-md-9">
                         <div class="form-group">
                           <div class="input-group mb-3">
-                            <input type="text" placeholder="Branch Name" aria-label="Branch Name"
-                              aria-describedby="button-search" class="form-control">
+                            <?php 
+                              $search_string = "";
+                                                            
+                              if(isset($_SESSION["search_string"]))
+                              {
+                                $search_string = $_SESSION["search_string"];
+                                $_SESSION["search_string"] = null;
+                              } 
+                                                        
+                              if($search_string == "")
+                              {
+                                echo "<input type=\"text\" placeholder=\"Branch Name\"";
+                                echo "name=\"search_branch_input\"";
+                                echo "aria-label=\"Branch Name\" aria-describedby=\"button-search\"";
+                                echo "class=\"form-control\">";
+                              }
+                              else
+                              {
+                                echo "<input type=\"text\" placeholder=\"Branch Name\"";
+                                echo "name=\"search_branch_input\"";
+                                echo "aria-label=\"Branch Name\" aria-describedby=\"button-search\"";
+                                echo "value=$search_string ";
+                                echo "class=\"form-control\">";
+                              }
+                            ?>
                             <div class="input-group-append">
-                              <button id="button-search" type="button" class="btn btn-primary">Search</button>
+                              <button id="button-search" type="submit" class="btn btn-primary" name="search_feedback"
+                                formaction="viewfeedbacks_post.php" formmethod="post">
+                                Search
+                              </button>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-
                   </form>
                 </div>
               </div>
@@ -106,7 +131,18 @@
                               
                               <tbody>
                               <?php
-                                $items = Feedback::all();
+                                $items = array();
+
+                                if(isset($_SESSION["search_result"]))
+                                {
+                                    $items = unserialize(serialize($_SESSION["search_result"]));
+                                    $_SESSION["search_result"] = null;
+                                } 
+                                else 
+                                {
+                                    $items = Feedback::all();
+                                }
+
                                 foreach ($items as $item)
                                 {
                                   echo "<tr>";

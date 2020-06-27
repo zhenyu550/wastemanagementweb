@@ -61,20 +61,50 @@
                   <h3 class="h6 text-uppercase mb-0">View Transactions</h3>
                 </div>
                 <div class="card-body">
-                  <form class="form-horizontal" action="viewtransactiondetail.php">
+                  <form class="form-horizontal" action="viewtransaction_post.php" method="post">
                     <div class="form-group row">
                       <label class="col-md-2 form-control-label">Search</label>
                       <div class="col-md-9">
                         <div class="row">
                           <div class="col-md-4">
-                            <select class="form-control">
+                            <select class="form-control" name="search_by">
                               <?php 
                                 // Get from session and determine which condition is selected, else use default
+                                $search_attribute = "";
+                                                            
+                                if(isset($_SESSION["search_attribute"]))
+                                {
+                                    $search_attribute = $_SESSION["search_attribute"];
+                                    $_SESSION["search_attribute"] = null;
+                                } 
+
+                                if($search_attribute == "transaction_date")
+                                {
+                                  echo "<option value=\"transaction_date\" selected>Date (YYYY-MM_DD)</option>";
+                                  echo "<option value=\"staff_id\">Manage By</option>";
+                                  echo "<option value=\"name\">Customer Name</option>";
+                                }
+                                else if ($search_attribute == "staff_id")
+                                {
+                                  echo "<option value=\"transaction_date\">Date (YYYY-MM_DD)</option>";
+                                  echo "<option value=\"staff_id\" selected>Manage By</option>";
+                                  echo "<option value=\"name\">Customer Name</option>";
+
+                                }
+                                else if ($search_attribute == "name")
+                                {
+                                  echo "<option value=\"transaction_date\">Date (YYYY-MM_DD)</option>";
+                                  echo "<option value=\"staff_id\">Manage By</option>";
+                                  echo "<option value=\"name\" selected>Customer Name</option>";
+
+                                }
+                                else
+                                {
+                                  echo "<option value=\"transaction_date\">Date (YYYY-MM_DD)</option>";
+                                  echo "<option value=\"staff_id\">Manage By</option>";
+                                  echo "<option value=\"name\">Customer Name</option>";
+                                }
                               ?>
-                              <option value="" disabled selected hidden>Search By</option>
-                              <option value="transaction_date">Date (YYYY-MM_DD)</option>
-                              <option value="staff_id">Manage By</option>
-                              <option value="name">Customer Name</option>
                             </select>
                           </div>
                           <div class="col-md-8">
@@ -82,12 +112,30 @@
                               <div class="input-group mb-3">
                                 <?php 
                                   // Get search string from session if have, else use default
+                                  
+                                  $search_keyword = "";
+                                                            
+                                  if(isset($_SESSION["search_keyword"]))
+                                  {
+                                      $search_keyword = $_SESSION["search_keyword"];
+                                      $_SESSION["search_keyword"] = null;
+                                  } 
+                              
+                                  if($search_keyword == "")
+                                  {
+                                    echo "<input type=\"text\" placeholder=\"Search Keyword\" aria-label=\"Search Keyword\" ";
+                                    echo "aria-describedby=\"button-search\" name=\"search_keyword\" class=\"form-control\">";
+                                  }
+                                  else
+                                  {
+                                    echo "<input type=\"text\" placeholder=\"Search Keyword\" aria-label=\"Search Keyword\" ";
+                                    echo "aria-describedby=\"button-search\" name=\"search_keyword\" value=\"$search_keyword\"";
+                                    echo " class=\"form-control\">";
+                                  }
                                 ?>
 
-                                <input type="text" placeholder="Search Keyword" aria-label="Search Keyword"
-                                  aria-describedby="button-search" class="form-control">
                                 <div class="input-group-append">
-                                  <button id="button-search" type="button" class="btn btn-primary">Search</button>
+                                  <button id="button-search" type="submit" class="btn btn-primary">Search</button>
                                 </div>
                               </div>
                             </div>
@@ -95,7 +143,6 @@
                         </div>
                       </div>
                     </div>
-
                   </form>
                 </div>
               </div>
@@ -120,7 +167,17 @@
                               </thead>
                               <tbody>
                                 <?php
-                                  $items = Transaction::all();
+                                  $items = array();
+                                  if(isset($_SESSION["search_result"]))
+                                  {
+                                    $items = unserialize(serialize($_SESSION["search_result"]));
+                                    $_SESSION["search_result"] = null;
+                                  } 
+                                  else 
+                                  {
+                                    $items = Transaction::all();
+                                  }
+
                                   foreach ($items as $item)
                                   {
                                     $item_id = $item->get_id();

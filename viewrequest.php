@@ -135,9 +135,7 @@
                                         if(isset($_SESSION["search_result"]))
                                         {
                                             $items = unserialize(serialize($_SESSION["search_result"]));
-                                            $search_string = $_SESSION["search_string"];
                                             $_SESSION["search_result"] = null;
-                                            $_SESSION["search_string"] = null;
                                         } 
                                         else 
                                         {
