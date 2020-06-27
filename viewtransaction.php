@@ -68,15 +68,22 @@
                         <div class="row">
                           <div class="col-md-4">
                             <select class="form-control">
+                              <?php 
+                                // Get from session and determine which condition is selected, else use default
+                              ?>
                               <option value="" disabled selected hidden>Search By</option>
-                              <option>Date (DD-MM-YYYY)</option>
-                              <option>Manage By</option>
-                              <option>Customer Name</option>
+                              <option value="transaction_date">Date (YYYY-MM_DD)</option>
+                              <option value="staff_id">Manage By</option>
+                              <option value="name">Customer Name</option>
                             </select>
                           </div>
                           <div class="col-md-8">
                             <div class="form-group">
                               <div class="input-group mb-3">
+                                <?php 
+                                  // Get search string from session if have, else use default
+                                ?>
+
                                 <input type="text" placeholder="Search Keyword" aria-label="Search Keyword"
                                   aria-describedby="button-search" class="form-control">
                                 <div class="input-group-append">
@@ -116,8 +123,9 @@
                                   $items = Transaction::all();
                                   foreach ($items as $item)
                                   {
+                                    $item_id = $item->get_id();
                                     echo "<tr>";
-                                    echo "<th scope=\"row\">".$item->get_id()."</th>";
+                                    echo "<th scope=\"row\">".$item_id."</th>";
                                     echo "<td>".$item->get_transaction_date()."</td>";
                                     echo "<td>".$item->get_name()."</td>";
                                     echo "<td>".$item->get_contact_no()."</td>";
@@ -125,7 +133,10 @@
                                    
                                     $staff = Staff::find("id=".$item->get_staff_id());
                                     echo "<td>".$staff->get_name()."</td>";
-                                    echo "<td><button type='submit' name='view_detail' class='btn btn-primary'>View</button></td>";
+                                    echo "<form>";
+                                    echo "<td><button type='submit' name='view_detail' formaction='viewtransactiondetail.php' formmethod='post' class='btn btn-primary'>View</button></td>";
+                                    echo "<input type='hidden' name='transaction_id' value='$item_id'>";
+                                    echo "</form>";
                                     echo "</tr>";
                                   }
                                 ?>

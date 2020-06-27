@@ -51,7 +51,6 @@
       <div class="container-fluid px-xl-5">
         <section class="py-5">
           <div class="row">
-
             <!-- Form Elements -->
             <div class="col-lg-12 mb-5">
               <div class="card">
@@ -60,75 +59,105 @@
                 </div>
                 <div class="card-body">
                   <form class="form-horizontal">
-                    <div class="form-group row">
-                        <label class="col-md-3 form-control-label">Name</label>
-                        <div class="col-md-9">
-                          <input type="text" placeholder="Insert name" class="form-control" readonly>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-md-3 form-control-label">Email</label>
-                        <div class="col-md-9">
-                          <input type="text" placeholder="Insert your email" class="form-control" readonly>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-md-3 form-control-label">Phone No.</label>
-                        <div class="col-md-9">
-                          <input type="text" placeholder="Insert your phone no." class="form-control" readonly>
-                        </div>
-                      </div>
-                    <div class="line"></div>
-                    <hr/>
-                    <div class="line"></div>
-                    <div class="form-group row">
-                      <label class="col-md-3 form-control-label">Date and Time</label>
-                      <div class="col-md-6">
-                        <input type="datetime-local" class="form-control" readonly>
-                      </div>
-                    </div>
-                     <div class="form-group row">
-                        <label class="col-md-3 form-control-label">Collection Point</label>
-                        <div class="col-md-6 select mb-3">
-                          <input type="text" placeholder="Collection Point" class="form-control" readonly>
-                        </div>
-                      </div>
+                  <?php 
+                    // Retrieve data from previous screen
+                    $transaction_id = $_POST["transaction_id"];
+                    $transaction = Transaction::find("id=$transaction_id");
+                  
+                    echo "<div class=\"form-group row\">";
+                    echo    "<label class=\"col-md-3 form-control-label\">Name</label>";
+                    echo    "<div class=\"col-md-9\">";
+                    echo      "<input type=\"text\" placeholder=\"Insert name\" class=\"form-control\" value=\"".$transaction->get_name()."\" readonly>";
+                    echo    "</div>";
+                    echo  "</div>";
+                    echo  "<div class=\"form-group row\">";
+                    echo    "<label class=\"col-md-3 form-control-label\">Email</label>";
+                    echo    "<div class=\"col-md-9\">";
+                    echo      "<input type=\"text\" placeholder=\"Insert your email\" class=\"form-control\" value=\"".$transaction->get_email()."\" readonly>";
+                    echo    "</div>";
+                    echo  "</div>";
+                    echo  "<div class=\"form-group row\">";
+                    echo    "<label class=\"col-md-3 form-control-label\">Phone No.</label>";
+                    echo    "<div class=\"col-md-9\">";
+                    echo      "<input type=\"text\" placeholder=\"Insert your phone no.\" class=\"form-control\" value=\"".$transaction->get_contact_no()."\" readonly>";
+                    echo    "</div>";
+                    echo  "</div>";
+                    echo "<div class=\"line\"></div>";
+                    echo "<hr/>";
+                    echo "<div class=\"line\"></div>";
+                    echo "<div class=\"form-group row\">";
+                    echo  "<label class=\"col-md-3 form-control-label\">Date</label>";
+                    echo  "<div class=\"col-md-6\">";
+                    echo    "<input type=\"text\" class=\"form-control\" value=\"".$transaction->get_transaction_date()."\" readonly>";
+                    echo  "</div>";
+                    echo "</div>";
+                    echo "<div class=\"form-group row\">";
+                    echo    "<label class=\"col-md-3 form-control-label\">Collection Point</label>";
+                    echo    "<div class=\"col-md-6 select mb-3\">";
+
+                    // Get all the waste data (from transaction_bin)
+                    $transaction_bins = Transaction_Bin::where("transaction_id=$transaction_id");
+
+                    // Get the first record
+                    $transaction_bin = $transaction_bins[0];
+                    $bin_id = $transaction_bin->get_bin_id();
+
+                    // Get that bin data
+                    $bin = Bin::find("id=$bin_id");
+                    $collection_point = Collection_Point::find("id=".$bin->get_cp_id());
+
+                    echo      "<input type=\"text\" placeholder=\"Collection Point\" class=\"form-control\" value=\"".$collection_point->get_name()."\" readonly>";
+                    echo    "</div>";
+                    echo  "</div>";
                     
-                      <div class="col-lg-10 mb-4" style="margin: auto">
-                        <div class="card">
-                          <div class="card-header">
-                            <h6 class="text-uppercase mb-0" style="text-align: center;">List of Wastes</h6>
-                            <br/>
-                            <div class="card-body">
-                              <table class="table table-striped table-hover card-text">
-                                <thead>
-                                  <tr>
-                                    <th>#</th>
-                                    <th>Waste Type</th>
-                                    <th>Weight (kg)</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Paper</td>
-                                    <td>1.50</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Metal</td>
-                                    <td>0.50</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    echo "<div class=\"col-lg-10 mb-4\" style=\"margin: auto\">";
+                    echo    "<div class=\"card\">";
+                    echo      "<div class=\"card-header\">";
+                    echo        "<h6 class=\"text-uppercase mb-0\" style=\"text-align: center;\">List of Wastes</h6>";
+                    echo        "<br/>";
+                    echo        "<div class=\"card-body\">";
+                    echo          "<table class=\"table table-striped table-hover card-text\">";
+                    echo            "<thead>";
+                    echo              "<tr>";
+                    echo                "<th>#</th>";
+                    echo                "<th>Waste Type</th>";
+                    echo                "<th>Weight (kg)</th>";
+                    echo              "</tr>";
+                    echo            "</thead>";
+                    echo            "<tbody>";
+
+                    for($index = 0; $index < count($transaction_bins); $index++)
+                    {
+                      // Get the bin
+                      $bin_id = $transaction_bins[$index]->get_bin_id();
+
+                      // Get that bin data
+                      $bin = Bin::find("id=$bin_id");
+  
+                      // Get the waste type
+                      $waste_type = Waste_Type::find("id=".$bin->get_type_id());
+
+                      echo "<tr>";
+                      echo "<th scope=\"row\">";
+                      echo $index + 1;
+                      echo "</th>";
+                      echo "<td>".$waste_type->get_name()."</td>";
+                      echo "<td>".$transaction_bins[$index]->get_weight()."</td>";
+                      echo "</tr>";
+                    }
+                    echo            "</tbody>";
+                    echo          "</table>";
+                    echo        "</div>";
+                    echo      "</div>";
+                    echo    "</div>";
+                    echo  "</div>";
+                    ?>
 
                     <div class="form-group row">
                       <div class="col-md-8 ml-auto">
-                        <button type="button" class="btn btn-secondary">Back</button>
+                        <form>
+                          <button type="submit" class="btn btn-secondary" formaction="viewtransaction.php" formmethod="post">Back</button>
+                        </form>
                       </div>
                     </div>
                   </form>
