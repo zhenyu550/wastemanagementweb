@@ -67,12 +67,36 @@
                                             <div class="col-md-9">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <input type="text" placeholder="Branch Name"
-                                                            aria-label="Branch Name" aria-describedby="button-search"
-                                                            class="form-control">
+                                                        <?php 
+                                                            $search_string = "";
+                                                            
+                                                            if(isset($_SESSION["search_string"]))
+                                                            {
+                                                                $search_string = $_SESSION["search_string"];
+                                                                $_SESSION["search_string"] = null;
+                                                            } 
+                                                        
+                                                            if($search_string == "")
+                                                            {
+                                                                echo "<input type=\"text\" placeholder=\"Branch Name\"";
+                                                                echo "name=\"search_branch_input\"";
+                                                                echo "aria-label=\"Branch Name\" aria-describedby=\"button-search\"";
+                                                                echo "class=\"form-control\">";
+                                                            }
+                                                            else
+                                                            {
+                                                                echo "<input type=\"text\" placeholder=\"Branch Name\"";
+                                                                echo "name=\"search_branch_input\"";
+                                                                echo "aria-label=\"Branch Name\" aria-describedby=\"button-search\"";
+                                                                echo "value=$search_string ";
+                                                                echo "class=\"form-control\">";
+                                                            }
+                                                        ?>
                                                         <div class="input-group-append">
-                                                            <button id="button-search" type="button"
-                                                                class="btn btn-primary">Search</button>
+                                                            <button id="button-search" type="submit"
+                                                                class="btn btn-primary" name="search_request"
+                                                                formaction="viewrequest_post.php" formmethod="post"
+                                                                >Search</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -105,13 +129,26 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $items = Pick_Up_Request::all();
+
+                                        $items = array();
+                                
+                                        if(isset($_SESSION["search_result"]))
+                                        {
+                                            $items = unserialize(serialize($_SESSION["search_result"]));
+                                            $search_string = $_SESSION["search_string"];
+                                            $_SESSION["search_result"] = null;
+                                            $_SESSION["search_string"] = null;
+                                        } 
+                                        else 
+                                        {
+                                            $items = Pick_Up_Request::all();
+                                        }
+                                        
                                         foreach ($items as $item)
                                         {
                                             $item_id = $item->get_id();
 
                                             echo "<tr>";
-                                            echo "<form class='form-horizontal' method='get' action='viewrequest_post.php' name='view_request' >";
                                             echo "<th scope=''row'>".$item_id."</th>";
                                             echo "<td>".$item->get_request_date()."</td>";
                                             echo "<td>".$item->get_name()."</td>";
@@ -161,7 +198,7 @@
                                             $status = $item->get_status();
                                             if($status == "Pending")
                                             {
-                                                echo "<button type='submit' class='btn btn-primary' formaction='viewrequest_post.php' formmethod='post'>Pending</button>";
+                                                echo "<button type='submit' class='btn btn-primary' name=\"pending\" formaction='viewrequest_post.php' formmethod='post'>Pending</button>";
                                             }
                                             else 
                                             {
