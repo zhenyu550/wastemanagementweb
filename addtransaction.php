@@ -62,6 +62,13 @@
           <section class="py-5">
             <div class="row">
               <!-- Form Elements -->
+              <?php
+                if(isset($_SESSION["transaction"]))
+                {
+                  $transaction = unserialize(serialize($_SESSION["transaction"]));
+                  $_SESSION["transaction"] = null;
+                }
+              ?>
               <div class="col-lg-12 mb-5">
                 <div class="card">
                   <div class="card-header">
@@ -78,6 +85,11 @@
                             name="name"
                             placeholder="Insert name"
                             class="form-control"
+                            <?php 
+                              if(!empty($transaction)){
+                                echo "value=\"".$transaction->get_name()."\"";
+                              }
+                            ?>
                           />
                         </div>
                       </div>
@@ -89,6 +101,11 @@
                             name="email"
                             placeholder="Insert email"
                             class="form-control"
+                            <?php 
+                              if(!empty($transaction)){
+                                echo "value=\"".$transaction->get_email()."\"";
+                              }
+                            ?>
                           />
                         </div>
                       </div>
@@ -102,6 +119,11 @@
                             name="phone_no"
                             placeholder="Insert phone no."
                             class="form-control"
+                            <?php 
+                              if(!empty($transaction)){
+                                echo "value=\"".$transaction->get_contact_no()."\"";
+                              }
+                            ?>
                           />
                         </div>
                       </div>
@@ -253,6 +275,7 @@
                                           placeholder="Weight"
                                           min="0"
                                           value="0"
+                                          step="0.001"
                                           class="form-control"
                                         />
                                       </div>
@@ -289,57 +312,45 @@
                                     <th>Weight (kg)</th>
                                   </tr>
                                 </thead>
-                                <?php
-                                  if(isset($_SESSION["transaction_bins"]))
-                                  {
-                                    $transaction_bins = unserialize(serialize($_SESSION["transaction_bins"]));
-                                    echo "<input type='hidden' name='waste_list' value='".json_encode($transaction_bins)."' />";
-                                  }
-                                ?>
                                 <tbody>
                                   <?php
-                                    if (isset($_SESSION["transaction_bins"]) && isset($_SESSION["transaction"]))
+                                    if(isset($_SESSION["transaction_bins_from_post"]))
                                     {
-                                      // Unserialize the object
+                                      $transaction_bins = unserialize(serialize($_SESSION["transaction_bins_from_post"]));
+                                      // $_SESSION["transaction_bins_to_post"] = $transaction_bins;
+                                      $_SESSION["transaction_bins_from_post"] = null;
+                                  
+                                      // Create a new array for json encoding
+                                      $exported_bins = array();
+                                      $exported_weights = array();
 
-                                      $transaction = unserialize(serialize($_SESSION["transaction"]));
-                                      $transaction_bins = unserialize(serialize($_SESSION["transaction_bins"]));
-                                      $index = 1;
-
-                                      // clear session
-                                      $_SESSION["transaction"] = null;
-                                      $_SESSION["transaction_bins"] = null;
-
-                                      echo var_dump($transaction_bins);
-
-                                      foreach($transaction_bins as $transaction_bin)
+                                      foreach ($transaction_bins as $transaction_bin)
                                       {
-                                        // Get the type of bin with the bin id
-                                        $bin = Bin::find("id=".$transaction_bin->get_bin_id());
+                                        array_push($exported_bins, $transaction_bin->get_bin_id());
+                                        array_push($exported_weights, $transaction_bin->get_weight());
+                                      }
 
-                                        echo var_dump($bin);
-                                        echo var_dump($type);
+                                      echo "<input type='hidden' name='waste_list_bins' value='";
+                                        echo json_encode($exported_bins);
+                                      echo "'/>";
+                                      echo "<input type='hidden' name='waste_list_weights' value='";
+                                        echo json_encode($exported_weights);
+                                      echo "'/>";
 
-                                        echo "<tr>";
-                                        echo "<th scope='row'>".$index."</th>";
-                                        echo "<td>".$transaction_bin->get_bin_id()."</td>";
-                                        echo "<td>".$transaction_bin->get_weight()."</td>";
-                                        echo "</tr>";
+                                      for($index = 0; $index < count($transaction_bins); $index++)
+                                      {
+                                      // Get the type of bin with the bin id
+                                       $bin = Bin::find("id=".$transaction_bins[$index]->get_bin_id());
+                                       $type = Waste_Type::find("id=".$bin->get_type_id());
 
-                                        $index++;
+                                       echo "<tr>";
+                                       echo "<th scope='row'>".($index + 1)."</th>";
+                                       echo "<td>".$type->get_name()."</td>";
+                                       echo "<td>".$transaction_bins[$index]->get_weight()."</td>";
+                                       echo "</tr>";
                                       }
                                     }
                                   ?>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Paper</td>
-                                    <td>1.50</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Metal</td>
-                                    <td>0.50</td>
-                                  </tr>
                                 </tbody>
                               </table>
                             </div>
