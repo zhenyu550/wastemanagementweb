@@ -25,7 +25,7 @@
     // Return to viewrequest
     echo "<script type='text/javascript'>location.href = 'viewrequest.php';</script>";  
   }
-  else if(isset($_POST["search_request"]))
+  else if(isset($_POST["search_request_pen"]))
   {
     $search_string = $_POST["search_branch_input"];
 
@@ -64,7 +64,7 @@
       }  
 
       // Fetch the search result from database
-      $search_result = Pick_Up_Request::where($branch_condition);
+      $search_result = Pick_Up_Request::where("(".$branch_condition.") and status='Pending'");
     }
 
     // Save the result into session
@@ -73,7 +73,57 @@
 
     // Return to viewrequest
     echo "<script type='text/javascript'>location.href = 'viewrequest.php';</script>";  
+  }  
+  else if(isset($_POST["search_request_com"]))
+  {
+    $search_string = $_POST["search_branch_input"];
+
+    $branches_to_search = array();
+
+    // Set default value if string is empty
+    if($search_string == "")
+    {
+      $branches_to_search = Collection_Point::all();
+    }
+    else 
+    {
+      $branches_to_search = Collection_Point::where("name LIKE '%".$search_string."%'");
+    }
+
+    // Search the branch id using the name
+    $branch_condition = "";
+    $search_result = array();
+
+    if(count($branches_to_search) > 0)
+    {
+      for($index = 0; $index < count($branches_to_search); $index++)
+      {
+        if($index == count($branches_to_search) - 1)
+        {
+          $branch = $branches_to_search[$index];
+          $branch_id = $branch->get_id();
+          $branch_condition = $branch_condition."cp_id=".$branch_id;
+        } 
+        else 
+        {
+          $branch = $branches_to_search[$index];
+          $branch_id = $branch->get_id();
+          $branch_condition = $branch_condition."cp_id=".$branch_id." OR ";
+        }
+      }  
+
+      // Fetch the search result from database
+      $search_result = Pick_Up_Request::where("(".$branch_condition.") and status='Done'");
+    }
+
+    // Save the result into session
+    $_SESSION["search_result"] = $search_result;
+    $_SESSION["search_string"] = $search_string;
+
+    // Return to viewrequest
+    echo "<script type='text/javascript'>location.href = 'viewrequestcompleted.php';</script>";  
   }
+
   else
   {
     exit;

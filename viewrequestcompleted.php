@@ -14,7 +14,7 @@ if (!isset($_SESSION["user"])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>View Pending Pick Up Requests</title>
+    <title>View Completed Pick Up Requests</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -54,7 +54,7 @@ if (!isset($_SESSION["user"])) {
                         <div class="col-lg-12 mb-5">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="h6 text-uppercase mb-0">View Pending Pick Up Requests</h3>
+                                    <h3 class="h6 text-uppercase mb-0">View Completed Pick Up Requests</h3>
                                 </div>
                                 <div class="card-body">
                                     <form class="form-horizontal">
@@ -85,21 +85,11 @@ if (!isset($_SESSION["user"])) {
                                                         }
                                                         ?>
                                                         <div class="input-group-append">
-                                                            <button id="button-search" type="submit" class="btn btn-primary" name="search_request_pen" formaction="viewrequest_post.php" formmethod="post">Search</button>
+                                                            <button id="button-search" type="submit" class="btn btn-primary" name="search_request_com" formaction="viewrequest_post.php" formmethod="post">Search</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?php 
-                                            // Get the branch of the staff
-                                            $staff = Staff::find("id=".$user);
-                                            $staff_branch_id = $staff->get_cp_id();
-                                            
-                                            // Find branch data
-                                            $cp = Collection_Point::find("id=".$staff_branch_id);
-                                            $cp_string = $cp->get_state()." - ".$cp->get_name();
-                                            ?>
-                                            <label class="col-md-10 form-control-label">You can only process requests that belongs to your branch (<b><?php echo $cp_string;?></b>).</label>
                                         </div>
                                     </form>
                                 </div>
@@ -124,6 +114,8 @@ if (!isset($_SESSION["user"])) {
                                             <th>Address</th>
                                             <th>Collection Point</th>
                                             <th>Status</th>
+                                            <th>Pick Up Date</th>
+                                            <th>Pick Up By</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -135,7 +127,7 @@ if (!isset($_SESSION["user"])) {
                                             $items = unserialize(serialize($_SESSION["search_result"]));
                                             $_SESSION["search_result"] = null;
                                         } else {
-                                            $items = Pick_Up_Request::where("status='Pending'");
+                                            $items = Pick_Up_Request::where("status='Done'");
                                         }
 
                                         foreach ($items as $item) {
@@ -172,36 +164,15 @@ if (!isset($_SESSION["user"])) {
 
                                             $cp_id = $item->get_cp_id();
                                             $cp = Collection_Point::find("id=" . $cp_id);
-                                            $cp_str = $cp->get_state()." - ".$cp->get_name();
+                                            $cp_str = $cp->get_state() . " - " . $cp->get_name();
 
                                             echo "<td>" . $cp_str . "</td>";
+                                            echo "<td>" . $item->get_status() . "</td>";
+                                            echo "<td>" . $item->get_pickup_date() . "</td>";
 
-                                            echo "<td>";
-                                            echo "<form>";
-                                            echo "<input type='hidden' name='staff_id' value='$user'>";
-                                            echo "<input type='hidden' name='request_id' value='$item_id'>";
+                                            $pickup_by_staff = Staff::find("id=" . $item->get_staff_id());
+                                            echo "<td>" . $pickup_by_staff->get_name() . "</td>";
 
-                                            echo "<div class='ml-auto'>";
-
-                                            // Check the status, if pending button can be pressed, else cannot
-                                            $status = $item->get_status();
-                                            if ($status == "Pending") {
-                                                // Check if the staff cp same with request cp
-                                                if($cp_id == $staff_branch_id)
-                                                {
-                                                    echo "<button type='submit' class='btn btn-primary' name=\"pending\" formaction='viewrequest_post.php' formmethod='post'>Pending</button>";
-                                                }
-                                                else
-                                                {
-                                                    echo "<button type='submit' class='btn btn-primary' disabled name=\"pending\" formaction='viewrequest_post.php' formmethod='post'>Pending</button>";
-                                                }
-                                            } else {
-                                                echo "<button type='button' class='btn btn-primary' disabled>Done</button>";
-                                            }
-                                            echo "</div>";
-                                            echo "</td>";
-
-                                            echo "</form>";
                                             echo "</tr>";
                                         }
                                         ?>

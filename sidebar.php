@@ -37,9 +37,18 @@ if (!isset($_SESSION["user"])) {
       <a href="viewfeedbacks.php" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Feedback</span></a>
     </li>
     <li class="sidebar-list-item">
-      <a href="viewrequest.php" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Pick Up Request</span></a>
+      <a href="#" data-toggle="collapse" data-target="#pagesReq" aria-expanded="false" aria-controls="pagesReq" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Pick Up Requests</span></a>
+      <div id="pagesReq" class="collapse">
+        <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
+          <li class="sidebar-list-item">
+            <a href="viewrequest.php" class="sidebar-link text-muted pl-lg-5">View Pending Requests</a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="viewrequestcompleted.php" class="sidebar-link text-muted pl-lg-5">View Completed Requests</a>
+          </li>
+        </ul>
+      </div>
     </li>
-
   </ul>
 
   <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">
