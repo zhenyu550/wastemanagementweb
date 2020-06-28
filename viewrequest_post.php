@@ -29,8 +29,6 @@
   {
     $search_string = $_POST["search_branch_input"];
 
-    echo var_dump($search_string);
-
     $branches_to_search = array();
 
     // Set default value if string is empty
@@ -46,8 +44,6 @@
     // Search the branch id using the name
     $branch_condition = "";
     $search_result = array();
-
-    echo var_dump($branches_to_search);
 
     if(count($branches_to_search) > 0)
     {
@@ -66,8 +62,6 @@
           $branch_condition = $branch_condition."cp_id=".$branch_id." OR ";
         }
       }  
-
-      echo var_dump($branch_condition);
 
       // Fetch the search result from database
       $search_result = Pick_Up_Request::where($branch_condition);

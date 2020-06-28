@@ -3,11 +3,9 @@
 session_start();
 require_once './database.php';
 
-
-
 if (isset($_POST["delete"])) {
     $cp_id = $_POST["cp_id"];
-    
+
 } else if (isset($_POST["search"])) {
     $search_keyword = $_POST["search_keyword"];
     $search_attribute = $_POST["search_by"];

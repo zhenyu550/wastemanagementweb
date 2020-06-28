@@ -20,8 +20,6 @@
   $branch_condition = "";
   $search_result = array();
 
-  echo var_dump($branches_to_search);
-
   if(count($branches_to_search) > 0)
   {
     for($index = 0; $index < count($branches_to_search); $index++)
@@ -52,5 +50,5 @@
 
   // Return to viewfeedback
   echo "<script type='text/javascript'>location.href = 'viewfeedbacks.php';</script>";
-  
+
 ?>

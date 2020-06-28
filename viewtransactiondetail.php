@@ -105,8 +105,9 @@
                     // Get that bin data
                     $bin = Bin::find("id=$bin_id");
                     $collection_point = Collection_Point::find("id=".$bin->get_cp_id());
-
-                    echo      "<input type=\"text\" placeholder=\"Collection Point\" class=\"form-control\" value=\"".$collection_point->get_name()."\" readonly>";
+                    $cp_string = $collection_point->get_state()." - ".$collection_point->get_name();
+                    
+                    echo      "<input type=\"text\" placeholder=\"Collection Point\" class=\"form-control\" value=\"".$cp_string."\" readonly>";
                     echo    "</div>";
                     echo  "</div>";
                     

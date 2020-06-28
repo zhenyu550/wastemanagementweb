@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2020-06-28 15:15:26
+Date: 2020-06-28 17:46:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -85,7 +85,7 @@ CREATE TABLE `collector` (
   `fax_no` varchar(20) DEFAULT NULL,
   `state` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of collector
@@ -95,6 +95,7 @@ INSERT INTO `collector` VALUES ('2', '4', 'GHD Pty Ltd	', 'A-G-01 & A-1-01, Bloc
 INSERT INTO `collector` VALUES ('3', '4', 'Crudesco Sdn Bhd	', 'No. 2 & 4,\r\nJalan 6C/7,\r\n43650 Bandar Baru Bangi, Selangor', '06-232 0986', '06-232 6561', 'Selangor');
 INSERT INTO `collector` VALUES ('4', '4', 'Cycle Trend Industries	', '	Suite 0-55 & 0-56,\r\n4812 Central Business District Perdana 2,\r\nJalan Perdana, Cyber 12,\r\n63000 Cyberjaya, Selangor', '06-232 0986', '06-232 6561', 'Selangor');
 INSERT INTO `collector` VALUES ('5', '4', 'ESP (International) Ltd.	', 'Lot 336,\r\nKompleks Majlis Agama Islam Selangor,\r\nSection 23, Jalan Kapar,\r\n41400 Klang, Selangor', '06-232 0986', '06-232 6561', 'Selangor');
+INSERT INTO `collector` VALUES ('7', '3', 'Krubong Recovery Sdn bhd', 'Lot 2625 & 2630 Pt 1671 & 1676 Kawasan Perindustrian Krubong, Krub Melaka, 75250 Malaysia', '60-63352519', '60-63352519', 'Melaka');
 
 -- ----------------------------
 -- Table structure for feedback
@@ -158,7 +159,7 @@ CREATE TABLE `staff` (
   `password` varchar(200) DEFAULT NULL,
   `type` varchar(20) DEFAULT 'Normal',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of staff
@@ -166,6 +167,7 @@ CREATE TABLE `staff` (
 INSERT INTO `staff` VALUES ('1', '1', 'Test', 'aaa@aaa.com', '111-1111111', 'test1', '123456', 'Normal');
 INSERT INTO `staff` VALUES ('2', '1', 'John', 'john@gmail.com', '012-3456789', 'test2', '123456', 'Normal');
 INSERT INTO `staff` VALUES ('3', '2', 'Admin Test', 'admintest@email.com', '012-3456789', 'admin1', '123456', 'Admin');
+INSERT INTO `staff` VALUES ('4', '4', 'Nico David', 'nicodavid@email.com', '012-2345678', 'nicodavid', '123456', 'Admin');
 
 -- ----------------------------
 -- Table structure for transaction
