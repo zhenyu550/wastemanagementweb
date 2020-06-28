@@ -73,6 +73,13 @@
                 Log in
               </button>
             </form>
+            <br>
+            <p class="text-muted">
+              Click
+              <a href="index.php">HERE</a>
+              to return to index page.
+            </p>
+
           </div>
         </div>
         <p class="mt-5 mb-0 text-gray-400 text-center">
