@@ -90,6 +90,16 @@ if (!isset($_SESSION["user"])) {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php 
+                                            // Get the branch of the staff
+                                            $staff = Staff::find("id=".$user);
+                                            $staff_branch_id = $staff->get_cp_id();
+                                            
+                                            // Find branch data
+                                            $cp = Collection_Point::find("id=".$staff_branch_id);
+                                            $cp_string = $cp->get_state()." - ".$cp->get_name();
+                                            ?>
+                                            <label class="col-md-10 form-control-label">You can only process requests that belongs to your branch (<b><?php echo $cp_string;?></b>).</label>
                                         </div>
                                     </form>
                                 </div>
@@ -162,9 +172,9 @@ if (!isset($_SESSION["user"])) {
 
                                             $cp_id = $item->get_cp_id();
                                             $cp = Collection_Point::find("id=" . $cp_id);
-                                            $cp_name = $cp->get_name();
+                                            $cp_str = $cp->get_state()." - ".$cp->get_name();
 
-                                            echo "<td>" . $cp_name . "</td>";
+                                            echo "<td>" . $cp_str . "</td>";
 
                                             echo "<td>";
                                             echo "<form>";
@@ -176,7 +186,15 @@ if (!isset($_SESSION["user"])) {
                                             // Check the status, if pending button can be pressed, else cannot
                                             $status = $item->get_status();
                                             if ($status == "Pending") {
-                                                echo "<button type='submit' class='btn btn-primary' name=\"pending\" formaction='viewrequest_post.php' formmethod='post'>Pending</button>";
+                                                // Check if the staff cp same with request cp
+                                                if($cp_id == $staff_branch_id)
+                                                {
+                                                    echo "<button type='submit' class='btn btn-primary' name=\"pending\" formaction='viewrequest_post.php' formmethod='post'>Pending</button>";
+                                                }
+                                                else
+                                                {
+                                                    echo "<button type='submit' class='btn btn-primary' disabled name=\"pending\" formaction='viewrequest_post.php' formmethod='post'>Pending</button>";
+                                                }
                                             } else {
                                                 echo "<button type='button' class='btn btn-primary' disabled>Done</button>";
                                             }
