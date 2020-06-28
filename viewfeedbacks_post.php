@@ -51,6 +51,6 @@
   $_SESSION["search_string"] = $search_string;
 
   // Return to viewfeedback
-  echo "<script type='text/javascript'>location.href = 'viewfeedbacks.php';</script>";  
-
+  echo "<script type='text/javascript'>location.href = 'viewfeedbacks.php';</script>";
+  
 ?>

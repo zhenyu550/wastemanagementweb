@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<?php 
-  session_start();
-  require_once './database.php';
-  if (!isset($_SESSION["user"]))
-  {
+<?php
+session_start();
+require_once './database.php';
+if (!isset($_SESSION["user"])) {
     echo "<script type='text/javascript'>location.href = 'login.php';</script>";
-  }
-  else
-  {
+} else {
     $user = $_SESSION["user"];
-  }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,8 +21,7 @@
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!-- Google fonts - Popppins for copy-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
     <!-- orion icons-->
@@ -67,36 +63,29 @@
                                             <div class="col-md-9">
                                                 <div class="form-group">
                                                     <div class="input-group mb-3">
-                                                        <?php 
-                                                            $search_string = "";
-                                                            
-                                                            if(isset($_SESSION["search_string"]))
-                                                            {
-                                                                $search_string = $_SESSION["search_string"];
-                                                                $_SESSION["search_string"] = null;
-                                                            } 
-                                                        
-                                                            if($search_string == "")
-                                                            {
-                                                                echo "<input type=\"text\" placeholder=\"Branch Name\"";
-                                                                echo "name=\"search_branch_input\"";
-                                                                echo "aria-label=\"Branch Name\" aria-describedby=\"button-search\"";
-                                                                echo "class=\"form-control\">";
-                                                            }
-                                                            else
-                                                            {
-                                                                echo "<input type=\"text\" placeholder=\"Branch Name\"";
-                                                                echo "name=\"search_branch_input\"";
-                                                                echo "aria-label=\"Branch Name\" aria-describedby=\"button-search\"";
-                                                                echo "value=$search_string ";
-                                                                echo "class=\"form-control\">";
-                                                            }
+                                                        <?php
+                                                        $search_string = "";
+
+                                                        if (isset($_SESSION["search_string"])) {
+                                                            $search_string = $_SESSION["search_string"];
+                                                            $_SESSION["search_string"] = null;
+                                                        }
+
+                                                        if ($search_string == "") {
+                                                            echo "<input type=\"text\" placeholder=\"Branch Name\"";
+                                                            echo "name=\"search_branch_input\"";
+                                                            echo "aria-label=\"Branch Name\" aria-describedby=\"button-search\"";
+                                                            echo "class=\"form-control\">";
+                                                        } else {
+                                                            echo "<input type=\"text\" placeholder=\"Branch Name\"";
+                                                            echo "name=\"search_branch_input\"";
+                                                            echo "aria-label=\"Branch Name\" aria-describedby=\"button-search\"";
+                                                            echo "value=$search_string ";
+                                                            echo "class=\"form-control\">";
+                                                        }
                                                         ?>
                                                         <div class="input-group-append">
-                                                            <button id="button-search" type="submit"
-                                                                class="btn btn-primary" name="search_request"
-                                                                formaction="viewrequest_post.php" formmethod="post"
-                                                                >Search</button>
+                                                            <button id="button-search" type="submit" class="btn btn-primary" name="search_request" formaction="viewrequest_post.php" formmethod="post">Search</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -128,62 +117,54 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
+                                        <?php
 
                                         $items = array();
-                                
-                                        if(isset($_SESSION["search_result"]))
-                                        {
+
+                                        if (isset($_SESSION["search_result"])) {
                                             $items = unserialize(serialize($_SESSION["search_result"]));
                                             $_SESSION["search_result"] = null;
-                                        } 
-                                        else 
-                                        {
+                                        } else {
                                             $items = Pick_Up_Request::all();
                                         }
-                                        
-                                        foreach ($items as $item)
-                                        {
+
+                                        foreach ($items as $item) {
                                             $item_id = $item->get_id();
 
                                             echo "<tr>";
-                                            echo "<th scope=''row'>".$item_id."</th>";
-                                            echo "<td>".$item->get_request_date()."</td>";
-                                            echo "<td>".$item->get_name()."</td>";
-                                            echo "<td>".$item->get_contact_no()."</td>";
+                                            echo "<th scope=''row'>" . $item_id . "</th>";
+                                            echo "<td>" . $item->get_request_date() . "</td>";
+                                            echo "<td>" . $item->get_name() . "</td>";
+                                            echo "<td>" . $item->get_contact_no() . "</td>";
 
                                             // Waste Type
                                             $waste_types_str = $item->get_waste_type();
-                                            
+
                                             // Split the waste type
                                             $waste_types = explode(", ", $waste_types_str);
 
                                             $wastes_types_names = '';
 
                                             // Get the name of the type using the id
-                                            for($index = 0; $index < count($waste_types) - 1; $index++)
-                                            {
-                                                $type_name = Waste_Type::find("id=".$waste_types[$index])->get_name();
+                                            for ($index = 0; $index < count($waste_types) - 1; $index++) {
+                                                $type_name = Waste_Type::find("id=" . $waste_types[$index])->get_name();
                                                 // Join the strings
-                                                if($index < count($waste_types) - 2)
-                                                {
-                                                    $wastes_types_names = $wastes_types_names.$type_name.", ";
-                                                }
-                                                else 
-                                                {
-                                                    $wastes_types_names = $wastes_types_names.$type_name;
+                                                if ($index < count($waste_types) - 2) {
+                                                    $wastes_types_names = $wastes_types_names . $type_name . ", ";
+                                                } else {
+                                                    $wastes_types_names = $wastes_types_names . $type_name;
                                                 }
                                             }
 
                                             // Display the string
-                                            echo "<td>".$wastes_types_names."</td>";
-                                            echo "<td>".$item->get_address()."</td>";
+                                            echo "<td>" . $wastes_types_names . "</td>";
+                                            echo "<td>" . $item->get_address() . "</td>";
 
                                             $cp_id = $item->get_cp_id();
-                                            $cp = Collection_Point::find("id=".$cp_id);
+                                            $cp = Collection_Point::find("id=" . $cp_id);
                                             $cp_name = $cp->get_name();
 
-                                            echo "<td>".$cp_name."</td>";
+                                            echo "<td>" . $cp_name . "</td>";
 
                                             echo "<td>";
                                             echo "<form>";
@@ -194,12 +175,9 @@
 
                                             // Check the status, if pending button can be pressed, else cannot
                                             $status = $item->get_status();
-                                            if($status == "Pending")
-                                            {
+                                            if ($status == "Pending") {
                                                 echo "<button type='submit' class='btn btn-primary' name=\"pending\" formaction='viewrequest_post.php' formmethod='post'>Pending</button>";
-                                            }
-                                            else 
-                                            {
+                                            } else {
                                                 echo "<button type='button' class='btn btn-primary' disabled>Done</button>";
                                             }
                                             echo "</div>";
@@ -207,9 +185,8 @@
 
                                             echo "</form>";
                                             echo "</tr>";
-
-                                        } 
-                                    ?>
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

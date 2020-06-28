@@ -20,6 +20,8 @@ $item->save();
 
 
 echo '<script language="javascript">';
-echo 'alert("Collection Point Added.")';
+echo 'alert("Collection Point Saved.")';
 echo '</script>';
 echo "<script type='text/javascript'>location.href = 'addcollectionpoint.php';</script>";
+
+?>

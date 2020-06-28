@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<?php 
-  session_start();
-  require_once './database.php';
-  if (!isset($_SESSION["user"]))
-  {
-    echo "<script type='text/javascript'>location.href = 'login.php';</script>";
-  }
-  else
-  {
-    $user = $_SESSION["user"];
-  }
+<?php
+session_start();
+require_once './database.php';
+if (!isset($_SESSION["user"])) {
+  echo "<script type='text/javascript'>location.href = 'login.php';</script>";
+} else {
+  $user = $_SESSION["user"];
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,8 +21,7 @@
   <!-- Bootstrap CSS-->
   <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome CSS-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <!-- Google fonts - Popppins for copy-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
   <!-- orion icons-->
@@ -61,121 +57,136 @@
                   <h3 class="h6 text-uppercase mb-0">View Collection Points</h3>
                 </div>
                 <div class="card-body">
-                  <form class="form-horizontal" method="post" action="addcollectionpoint.php">
+                  <form class="form-horizontal" action="viewcollectionpoints_post.php" method="post">
                     <div class="form-group row">
-                      <label class="col-md-2 form-control-label">Branch Name</label>
+                      <label class="col-md-2 form-control-label">Search</label>
                       <div class="col-md-9">
-                        <div class="form-group">
-                          <div class="input-group mb-3">
-                            <input type="text" placeholder="Branch Name" aria-label="Branch Name"
-                              aria-describedby="button-search" class="form-control">
-                            <div class="input-group-append">
-                              <button id="button-search" type="button" class="btn btn-primary">Search</button>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <select class="form-control" name="search_by">
+                              <?php
+                              // Get from session and determine which condition is selected, else use default
+                              $search_attribute = "";
+
+                              if (isset($_SESSION["search_attribute"])) {
+                                $search_attribute = $_SESSION["search_attribute"];
+                                $_SESSION["search_attribute"] = null;
+                              }
+
+                              // Create array of options
+                              $option_names = array("Branch Name", "State");
+                              $option_values = array("name", "state");
+
+                              for ($index = 0; $index < count($option_names); $index++) {
+                                $option_name = $option_names[$index];
+                                $option_value = $option_values[$index];
+
+                                if ($option_value == $search_attribute) {
+                                  echo "<option value=\"$option_value\" selected>$option_name</option>";
+                                } else {
+                                  echo "<option value=\"$option_value\">$option_name</option>";
+                                }
+                              }
+                              ?>
+                            </select>
+                          </div>
+                          <div class="col-md-8">
+                            <div class="form-group">
+                              <div class="input-group mb-3">
+                                <?php
+                                // Get search string from session if have, else use default
+
+                                $search_keyword = "";
+
+                                if (isset($_SESSION["search_keyword"])) {
+                                  $search_keyword = $_SESSION["search_keyword"];
+                                  $_SESSION["search_keyword"] = null;
+                                }
+
+                                if ($search_keyword == "") {
+                                  echo "<input type=\"text\" placeholder=\"Search Keyword\" aria-label=\"Search Keyword\" ";
+                                  echo "aria-describedby=\"button-search\" name=\"search_keyword\" class=\"form-control\">";
+                                } else {
+                                  echo "<input type=\"text\" placeholder=\"Search Keyword\" aria-label=\"Search Keyword\" ";
+                                  echo "aria-describedby=\"button-search\" name=\"search_keyword\" value=\"$search_keyword\"";
+                                  echo " class=\"form-control\">";
+                                }
+                                ?>
+
+                                <div class="input-group-append">
+                                  <button id="button-search" type="submit" name="search" class="btn btn-primary">Search</button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div class="form-group row">
-                      <label class="col-md-2 form-control-label">State</label>
-                      <div class="col-md-9 select mb-3">
-                        <select name="state" class="form-control">
-                          <option>ALL</option>
-                          <option>Johor</option>
-                          <option>Kedah</option>
-                          <option>Kelantan</option>
-                          <option>Melaka</option>
-                          <option>Negeri Sembilan</option>
-                          <option>Pahang</option>
-                          <option>Pulau Pinang</option>
-                          <option>Perak</option>
-                          <option>Perlis</option>
-                          <option>Sabah</option>
-                          <option>Sarawak</option>
-                          <option>Selangor</option>
-                          <option>Terangganu</option>
-                          <option>W.P. Kuala Lumpur</option>
-                          <option>W.P. Labuan</option>
-                          <option>W.P. Putrajaya</option>
-                        </select>
-                      </div>
-                    </div>
-                      <div class="form-group row">
-                      <div class="col-md-8 ml-auto">
-                        <button type="submit" class="btn btn-primary">Add</button>
-                      </div>
-                    </div>
+
                   </form>
                 </div>
               </div>
             </div>
 
             <div class="col-lg-12 mb-4" style="margin: auto">
-                      <div class="card">
-                        <div class="card-header">
-                          <h6 class="text-uppercase mb-0" style="text-align: center;">List of Collection Points</h6>
-                          <!-- Modal Form-->
-                          <div class="card-body">
-                            <table class="table table-striped table-hover card-text" id="transaction_table">
-                              <thead>
-                                <tr>
-                                  <th>ID</th>
-                                  <th>Name</th>
-                                  <th>Address</th>
-                                  <th>Phone No</th>
-                                  <th>Fax No</th>
-                                  <th>Social Media Tag</th>
-                                  <th>State</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <?php 
-                                  $items = Collection_Point::all();
-                                  foreach($items as $item)
-                                  {
-                                    echo "<tr>";
-                                    echo "<th scope=\"row\">".$item->get_id()."</th>";
-                                    echo "<td>".$item->get_name()."</td>";
-                                    echo "<td>".$item->get_address()."</td>";
-                                    echo "<td>".$item->get_phone_no()."</td>";
-                                    echo "<td>".$item->get_fax_no()."</td>";
-                                    echo "<td>".$item->get_social_media_tag()."</td>";
-                                    echo "<td>".$item->get_state()."</td>";
-                                    echo "<td><button type='submit' class='btn btn-primary' name='Edit_".$item->get_id()."'>Edit</button></td>";
-                                    echo "<td><button type='submit' class='btn btn-primary' name='Delete".$item->get_id()."'>Delete</button></td>";
-                                    echo "</tr>";
-                                  }
-                                ?>
+              <div class="card">
+                <div class="card-header">
+                  <form>
+                    <button id="button-add" type="submit" name="add" class="btn btn-primary" formaction="addcollectionpoint.php" formmethod="post">Add Collection Point</button>
+                  </form>
+                  <h6 class="text-uppercase mb-0" style="text-align: center;">List of Collection Points</h6>
+                  <!-- Modal Form-->
+                  <div class="card-body">
+                    <table class="table table-striped table-hover card-text" id="transaction_table">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Address</th>
+                          <th>Phone No</th>
+                          <th>Fax No</th>
+                          <th>Social Media Tag</th>
+                          <th>State</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        $items = array();
+                        if(isset($_SESSION["search_result"]))
+                        {
+                          $items = unserialize(serialize($_SESSION["search_result"]));
+                          $_SESSION["search_result"] = null;
+                        } 
+                        else 
+                        {
+                          $items = Collection_Point::all();
+                        }
+                        foreach ($items as $item) {
+                          $item_id = $item->get_id();
+                          echo "<tr>";
+                          echo "<th scope=\"row\">" . $item_id . "</th>";
+                          echo "<td>" . $item->get_name() . "</td>";
+                          echo "<td>" . $item->get_address() . "</td>";
+                          echo "<td>" . $item->get_phone_no() . "</td>";
+                          echo "<td>" . $item->get_fax_no() . "</td>";
+                          echo "<td>" . $item->get_social_media_tag() . "</td>";
+                          echo "<td>" . $item->get_state() . "</td>";
+                          echo "<form>";
+                          echo "<td><button type='submit' class='btn btn-primary' name='edit' formmethod='post' formaction='editcollectionpoint.php'>Edit</button></td>";
+                          // echo "<td><button type='submit' class='btn btn-primary' name='delete' formmethod='post'>Delete</button></td>";
+                          echo "<input type='hidden' name='cp_id' value='$item_id'>";
+                          echo "</form>";
+                          echo "</tr>";
+                        }
+                        ?>
 
-                                <!-- <tr>
-                                  <th scope="row">1</th>
-                                  <td>HQ</td>
-                                  <td>No. 1 & 3, Jalan KF4,Kota Fesyen – MITC, Hang Tuah Jaya, 75450 Ayer Keroh, Melaka</td>
-                                  <td>06-232 0986</td>
-                                  <td>06-232 6561</td>
-                                  <td>@nonbiowaste_HQ</td>
-                                  <td>Melaka</td>
-                                  <td><button type="submit" class="btn btn-primary">Edit</button></td>
-                                  <td><button type="submit" class="btn btn-primary">Delete</button></td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td>Bandar Baru Bangi 1</td>
-                                  <td>No. 2 & 4, Jalan 6C/7, 43650 Bandar Baru Bangi, Selangor  </td>
-                                  <td>06-2320986</td>
-                                  <td>06-2326561</td>
-                                  <td>@nonbiowaste_Bangi1</td>
-                                  <td>Selangor</td>
-                                  <td><button type="submit" class="btn btn-primary">Edit</button></td>
-                                  <td><button type="submit" class="btn btn-primary">Delete</button></td>
-                                </tr> -->
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
 
           </div>
         </section>
@@ -185,7 +196,7 @@
     </div>
   </div>
   <!-- JavaScript files-->
-    <?php include("javascript.php"); ?>
+  <?php include("javascript.php"); ?>
 </body>
 
 </html>

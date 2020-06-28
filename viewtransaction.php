@@ -68,42 +68,29 @@
                         <div class="row">
                           <div class="col-md-4">
                             <select class="form-control" name="search_by">
-                              <?php 
-                                // Get from session and determine which condition is selected, else use default
-                                $search_attribute = "";
-                                                            
-                                if(isset($_SESSION["search_attribute"]))
-                                {
-                                    $search_attribute = $_SESSION["search_attribute"];
-                                    $_SESSION["search_attribute"] = null;
-                                } 
+                            <?php
+                              // Get from session and determine which condition is selected, else use default
+                              $search_attribute = "";
 
-                                if($search_attribute == "transaction_date")
-                                {
-                                  echo "<option value=\"transaction_date\" selected>Date (YYYY-MM_DD)</option>";
-                                  echo "<option value=\"staff_id\">Manage By</option>";
-                                  echo "<option value=\"name\">Customer Name</option>";
-                                }
-                                else if ($search_attribute == "staff_id")
-                                {
-                                  echo "<option value=\"transaction_date\">Date (YYYY-MM_DD)</option>";
-                                  echo "<option value=\"staff_id\" selected>Manage By</option>";
-                                  echo "<option value=\"name\">Customer Name</option>";
+                              if (isset($_SESSION["search_attribute"])) {
+                                $search_attribute = $_SESSION["search_attribute"];
+                                $_SESSION["search_attribute"] = null;
+                              }
 
-                                }
-                                else if ($search_attribute == "name")
-                                {
-                                  echo "<option value=\"transaction_date\">Date (YYYY-MM_DD)</option>";
-                                  echo "<option value=\"staff_id\">Manage By</option>";
-                                  echo "<option value=\"name\" selected>Customer Name</option>";
+                              // Create array of options
+                              $option_names = array("Date (YYYY-MM_DD)", "Manage By", "Customer Name");
+                              $option_values = array("transaction_date", "staff_id", "name");
 
+                              for ($index = 0; $index < count($option_names); $index++) {
+                                $option_name = $option_names[$index];
+                                $option_value = $option_values[$index];
+
+                                if ($option_value == $search_attribute) {
+                                  echo "<option value=\"$option_value\" selected>$option_name</option>";
+                                } else {
+                                  echo "<option value=\"$option_value\">$option_name</option>";
                                 }
-                                else
-                                {
-                                  echo "<option value=\"transaction_date\">Date (YYYY-MM_DD)</option>";
-                                  echo "<option value=\"staff_id\">Manage By</option>";
-                                  echo "<option value=\"name\">Customer Name</option>";
-                                }
+                              }
                               ?>
                             </select>
                           </div>
