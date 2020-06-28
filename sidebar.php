@@ -65,7 +65,7 @@ if (!isset($_SESSION["user"])) {
       echo    "</li>";
   
       echo    "<li class=\"sidebar-list-item\">";
-      echo      "<a href=\"#\" class=\"sidebar-link text-muted pl-lg-5\">Manage Staff</a>";
+      echo      "<a href=\"viewstaffs.php\" class=\"sidebar-link text-muted pl-lg-5\">Manage Staff</a>";
       echo    "</li>";
       echo  "</ul>";
       echo "</div>";
