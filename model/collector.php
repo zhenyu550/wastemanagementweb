@@ -4,11 +4,11 @@ require_once "model.php";
 Class Collector extends Model
 {
   const TABLE_NAME = 'collector';
-  protected $form = ["id" => "int", "type_id" => "int", "company_name" => "string", "company_address" => "string", "tel_no" => "string", "fax_no" => "string"];
+  protected $form = ["id" => "int", "type_id" => "int", "company_name" => "string", "company_address" => "string", "tel_no" => "string", "fax_no" => "string", "state" => "string"];
 
   public function __construct()
   {
-    $this->data = ["id" => 0, "type_id" => 0, "company_name" => "", "company_address" => "", "tel_no" => "", "fax_no" => ""];
+    $this->data = ["id" => 0, "type_id" => 0, "company_name" => "", "company_address" => "", "tel_no" => "", "fax_no" => "", "state" => ""];
   }
 
   public function set_id($value)
@@ -71,6 +71,16 @@ Class Collector extends Model
     return $this->data['fax_no'];
   }
 
+  public function set_state($value)
+  {
+    $this->data['state'] = $value;
+  }
+
+  public function get_state()
+  {
+    return $this->data['state'];
+  }
+
   public function set_data($source)
   {
     $this->data['id'] = intval($source['id']);
@@ -79,6 +89,7 @@ Class Collector extends Model
     $this->data['company_address'] = $source['company_address'];
     $this->data['tel_no'] = $source['tel_no'];
     $this->data['fax_no'] = $source['fax_no'];
+    $this->data['state'] = $source['state'];
   }
 }
 

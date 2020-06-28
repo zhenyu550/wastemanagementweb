@@ -66,27 +66,20 @@
                         <?php
                           $items = Collector::all();
                           $waste_types = Waste_Type::all();
-                          $type = array();
+                          $types = array();
                           foreach ($items as $item)
                           {
-                            if (!array_key_exists($item->get_type_id(), $type))
+                            if (!array_key_exists($item->get_type_id(), $types))
                             {
-                              $type[$item->get_type_id()] = 0;
+                              $types[$item->get_type_id()] = 0;
                             }
-                            $type[$item->get_type_id()] += 1;
+                            $types[$item->get_type_id()] += 1;
                           }
                    
-                          foreach ($type as $type => $num)
+                          foreach ($types as $type => $num)
                           {
-                            $type_id = $item->get_type_id();
-                            $type_name = "";
-                            foreach ($waste_types as $waste_type)
-                            {
-                              if($waste_type->get_id() == $type_id){
-                                $type_name = $waste_type->get_name();
-                                break;
-                              }
-                            }
+                            $type_data = Waste_Type::find("id=".$type);
+                            $type_name = $type_data->get_name();
 
                             echo "<th scope=\"row\" rowspan=\"".strval($num+1)."\" style=\"text-align: center; vertical-align: middle\">$type_name</th>";
                             foreach($items as $item)

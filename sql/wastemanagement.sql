@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2020-06-26 17:54:02
+Date: 2020-06-28 15:15:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,10 +32,10 @@ CREATE TABLE `bin` (
 -- ----------------------------
 -- Records of bin
 -- ----------------------------
-INSERT INTO `bin` VALUES ('1', '0.000', '100.000', '1', 'empty', '1');
-INSERT INTO `bin` VALUES ('2', '0.000', '100.000', '2', 'empty', '1');
-INSERT INTO `bin` VALUES ('3', '0.000', '100.000', '3', 'empty', '1');
-INSERT INTO `bin` VALUES ('4', '0.000', '100.000', '4', 'empty', '1');
+INSERT INTO `bin` VALUES ('1', '1.000', '100.000', '1', 'empty', '1');
+INSERT INTO `bin` VALUES ('2', '8.000', '100.000', '2', 'empty', '1');
+INSERT INTO `bin` VALUES ('3', '3.000', '100.000', '3', 'empty', '1');
+INSERT INTO `bin` VALUES ('4', '2.000', '100.000', '4', 'empty', '1');
 INSERT INTO `bin` VALUES ('5', '0.000', '100.000', '5', 'empty', '1');
 INSERT INTO `bin` VALUES ('6', '0.000', '100.000', '1', 'empty', '2');
 INSERT INTO `bin` VALUES ('7', '0.000', '100.000', '2', 'empty', '2');
@@ -68,7 +68,7 @@ CREATE TABLE `collection_point` (
 -- Records of collection_point
 -- ----------------------------
 INSERT INTO `collection_point` VALUES ('1', 'Ayer Keroh', '06-232 0986', '06-232 6561', '@nonbiowaste_HQ', 'No. 1 & 3,\r\nJalan KF4,Kota Fesyen – MITC,\r\nHang Tuah Jaya,\r\n75450 Ayer Keroh,<br> Melaka', 'Melaka');
-INSERT INTO `collection_point` VALUES ('2', 'Bandar Melaka', '06-232 0986', '06-232 6561', '@nonbiowaste_BM', 'Lot G1, G2 & G3,\r\nWisma Air,\r\nJalan Hang Tuah,\r\n75300 Melaka', 'Melaka');
+INSERT INTO `collection_point` VALUES ('2', 'Bandar Melaka', '06-232 0986', '06-232 6561', '@nonbiowaste_BM', 'Lot G1, G2 & G3,Wisma Air,Jalan Hang Tuah,75300 Melaka', 'Melaka');
 INSERT INTO `collection_point` VALUES ('3', 'Ampang', '06-232 0986', '06-232 6561', '@nonbiowaste_AP', 'No. 1 & 3,\r\nJalan Pandan Prima 2,\r\nDataran Prima Ampang,\r\n68000 Ampang, Selangor', 'Selangor');
 INSERT INTO `collection_point` VALUES ('4', 'Johor Bahru 1', '08-10293736', '08-67894532', '@nonbiowaste_JB', 'Jalan Firma 2/2, Kawasan Perindustrian Tebrau 1, 81100 Johor Bahru, Johor', 'Johor');
 
@@ -83,17 +83,18 @@ CREATE TABLE `collector` (
   `company_address` varchar(300) DEFAULT NULL,
   `tel_no` varchar(20) DEFAULT NULL,
   `fax_no` varchar(20) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of collector
 -- ----------------------------
-INSERT INTO `collector` VALUES ('1', '4', 'DILO Armaturen und Anlagen GmbH	', 'No. 1 & 3,\r\nJalan Pandan Prima 2,\r\nDataran Prima Ampang,\r\n68000 Ampang, Selangor	', '06-232 0986', '06-232 6561');
-INSERT INTO `collector` VALUES ('2', '4', 'GHD Pty Ltd	', 'A-G-01 & A-1-01, Block A,\r\nNo. 2, Jalan PJU 1A/7A,\r\nAra Damansara, PJU 1A,\r\n47301 Petaling Jaya, Selangor	', '06-232 0986', '06-232 6561');
-INSERT INTO `collector` VALUES ('3', '4', 'Crudesco Sdn Bhd	', 'No. 2 & 4,\r\nJalan 6C/7,\r\n43650 Bandar Baru Bangi, Selangor', '06-232 0986', '06-232 6561');
-INSERT INTO `collector` VALUES ('4', '4', 'Cycle Trend Industries	', '	Suite 0-55 & 0-56,\r\n4812 Central Business District Perdana 2,\r\nJalan Perdana, Cyber 12,\r\n63000 Cyberjaya, Selangor', '06-232 0986', '06-232 6561');
-INSERT INTO `collector` VALUES ('5', '4', 'ESP (International) Ltd.	', 'Lot 336,\r\nKompleks Majlis Agama Islam Selangor,\r\nSection 23, Jalan Kapar,\r\n41400 Klang, Selangor', '06-232 0986', '06-232 6561');
+INSERT INTO `collector` VALUES ('1', '4', 'DILO Armaturen und Anlagen GmbH	', 'No. 1 & 3,\r\nJalan Pandan Prima 2,\r\nDataran Prima Ampang,\r\n68000 Ampang, Selangor	', '06-232 0986', '06-232 6561', 'Selangor');
+INSERT INTO `collector` VALUES ('2', '4', 'GHD Pty Ltd	', 'A-G-01 & A-1-01, Block A,\r\nNo. 2, Jalan PJU 1A/7A,\r\nAra Damansara, PJU 1A,\r\n47301 Petaling Jaya, Selangor	', '06-232 0986', '06-232 6561', 'Selangor');
+INSERT INTO `collector` VALUES ('3', '4', 'Crudesco Sdn Bhd	', 'No. 2 & 4,\r\nJalan 6C/7,\r\n43650 Bandar Baru Bangi, Selangor', '06-232 0986', '06-232 6561', 'Selangor');
+INSERT INTO `collector` VALUES ('4', '4', 'Cycle Trend Industries	', '	Suite 0-55 & 0-56,\r\n4812 Central Business District Perdana 2,\r\nJalan Perdana, Cyber 12,\r\n63000 Cyberjaya, Selangor', '06-232 0986', '06-232 6561', 'Selangor');
+INSERT INTO `collector` VALUES ('5', '4', 'ESP (International) Ltd.	', 'Lot 336,\r\nKompleks Majlis Agama Islam Selangor,\r\nSection 23, Jalan Kapar,\r\n41400 Klang, Selangor', '06-232 0986', '06-232 6561', 'Selangor');
 
 -- ----------------------------
 -- Table structure for feedback
@@ -139,8 +140,8 @@ CREATE TABLE `pick_up_request` (
 -- ----------------------------
 -- Records of pick_up_request
 -- ----------------------------
-INSERT INTO `pick_up_request` VALUES ('1', 'aaa', '111-111111', '1, 2', '2020-06-22', 'testtt', '2', 'Pending', null, '0000-00-00 00:00:00');
-INSERT INTO `pick_up_request` VALUES ('2', 'David', '011-2344456', '1', '2020-06-26', 'test', '1', 'Pending', null, '0000-00-00 00:00:00');
+INSERT INTO `pick_up_request` VALUES ('1', 'aaa', '111-111111', '1, 2, ', '2020-06-22', 'testtt', '2', 'Done', '1', '2020-06-26 14:41:43');
+INSERT INTO `pick_up_request` VALUES ('2', 'David', '011-2344456', '1, ', '2020-06-26', 'test', '1', 'Done', '1', '2020-06-26 15:01:20');
 INSERT INTO `pick_up_request` VALUES ('5', 'Li Yong-Rui', '015-6789345', '1, 2, 3, 4, ', '2020-06-26', '715C, Jalan Emas 1, Taman Kerjasama, 75470 Bukit Beruang, Melaka', '1', 'Pending', null, '0000-00-00 00:00:00');
 
 -- ----------------------------
@@ -178,7 +179,7 @@ CREATE TABLE `transaction` (
   `contact_no` char(20) DEFAULT NULL,
   `transaction_date` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of transaction
@@ -187,6 +188,8 @@ INSERT INTO `transaction` VALUES ('1', '1', 'David Lee', 'david@email.com', '012
 INSERT INTO `transaction` VALUES ('2', '1', 'Aziz ', 'aziz@email.com', '014-8899123', '2020-06-25');
 INSERT INTO `transaction` VALUES ('3', '3', 'Khairul', 'khairul@email.com', '013-3421789', '2020-06-25');
 INSERT INTO `transaction` VALUES ('4', '3', 'Test1', 'testemail@email.com', '012-2347890', '2020-06-26');
+INSERT INTO `transaction` VALUES ('6', '1', 'John Cena', 'johncena@email.com', '013-23144801', '2020-06-27');
+INSERT INTO `transaction` VALUES ('7', '1', 'Alisha Dual', 'alishadual@email.com', '014-5588910', '2020-06-27');
 
 -- ----------------------------
 -- Table structure for transaction_bin
@@ -198,7 +201,7 @@ CREATE TABLE `transaction_bin` (
   `bin_id` int(20) NOT NULL,
   `weight` decimal(10,3) DEFAULT '0.000',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of transaction_bin
@@ -210,6 +213,11 @@ INSERT INTO `transaction_bin` VALUES ('4', '2', '4', '5.000');
 INSERT INTO `transaction_bin` VALUES ('5', '2', '1', '7.000');
 INSERT INTO `transaction_bin` VALUES ('6', '3', '6', '10.000');
 INSERT INTO `transaction_bin` VALUES ('7', '3', '8', '7.000');
+INSERT INTO `transaction_bin` VALUES ('9', '6', '1', '1.000');
+INSERT INTO `transaction_bin` VALUES ('10', '6', '2', '5.000');
+INSERT INTO `transaction_bin` VALUES ('11', '6', '3', '3.000');
+INSERT INTO `transaction_bin` VALUES ('12', '7', '4', '2.000');
+INSERT INTO `transaction_bin` VALUES ('13', '7', '2', '3.000');
 
 -- ----------------------------
 -- Table structure for waste_type
