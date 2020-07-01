@@ -116,6 +116,11 @@ if (!isset($_SESSION["user"])) {
                                         </div>
 
                                         <div class="form-group row">
+                                            <label class="col-md-9 form-control-label">*The staff username is the default password.</label>
+                                        </div>
+
+
+                                        <div class="form-group row">
                                             <div class="col-md-8 ml-auto">
                                                 <button type="reset" class="btn btn-secondary">
                                                     Reset

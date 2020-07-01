@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2020-06-28 17:46:17
+Date: 2020-07-01 19:05:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -164,10 +164,10 @@ CREATE TABLE `staff` (
 -- ----------------------------
 -- Records of staff
 -- ----------------------------
-INSERT INTO `staff` VALUES ('1', '1', 'Test', 'aaa@aaa.com', '111-1111111', 'test1', '123456', 'Normal');
-INSERT INTO `staff` VALUES ('2', '1', 'John', 'john@gmail.com', '012-3456789', 'test2', '123456', 'Normal');
-INSERT INTO `staff` VALUES ('3', '2', 'Admin Test', 'admintest@email.com', '012-3456789', 'admin1', '123456', 'Admin');
-INSERT INTO `staff` VALUES ('4', '4', 'Nico David', 'nicodavid@email.com', '012-2345678', 'nicodavid', '123456', 'Admin');
+INSERT INTO `staff` VALUES ('1', '1', 'Peter Johnson', 'peterjohnson@email.com', '111-1111111', 'test1', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', 'Normal');
+INSERT INTO `staff` VALUES ('2', '1', 'John', 'john@gmail.com', '012-3456789', 'test2', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', 'Normal');
+INSERT INTO `staff` VALUES ('3', '2', 'Siti Nurhaliza', 'nurhalizasiti@email.com', '013-2465798', 'admin1', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', 'Admin');
+INSERT INTO `staff` VALUES ('4', '4', 'Nico David', 'nicodavid@email.com', '012-2345678', 'nicodavid', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', 'Admin');
 
 -- ----------------------------
 -- Table structure for transaction

@@ -7,7 +7,7 @@ $email = $_POST["email"];
 $username = $_POST["username"];
 $branch_id = $_POST["cp"];
 $type = $_POST["type"];
-$password = "123456";
+$password = hash('sha512', $username);
 
 $item = new Staff();
 $item->set_name($name);
