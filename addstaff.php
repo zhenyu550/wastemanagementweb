@@ -61,20 +61,47 @@ if (!isset($_SESSION["user"])) {
                                         <div class="form-group row">
                                             <label class="col-md-2 form-control-label">Name</label>
                                             <div class="col-md-9">
-                                                <input name="name" required type="text" placeholder="Insert name" class="form-control" />
+                                                <?php
+                                                if (isset($_SESSION["name"])) {
+                                                    $name = $_SESSION["name"];
+                                                    $_SESSION["name"] = null;
+
+                                                    echo "<input name=\"name\" required type=\"text\" placeholder=\"Insert name\" class=\"form-control\" value=\"$name\" />";
+                                                } else {
+                                                    echo "<input name=\"name\" required type=\"text\" placeholder=\"Insert name\" class=\"form-control\" />";
+                                                }
+                                                ?>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 form-control-label">Phone No.</label>
                                             <div class="col-md-9">
-                                                <input name="phone" required type="text" placeholder="Insert phone no." class="form-control" />
+                                                <?php
+                                                if (isset($_SESSION["phone_no"])) {
+                                                    $phone_no = $_SESSION["phone_no"];
+                                                    $_SESSION["phone_no"] = null;
+
+                                                    echo "<input name=\"phone_no\" required type=\"text\" placeholder=\"Insert phone no.\" class=\"form-control\" value=\"$phone_no\" />";
+                                                } else {
+                                                    echo "<input name=\"phone_no\" required type=\"text\" placeholder=\"Insert phone no.\" class=\"form-control\" />";
+                                                }
+                                                ?>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-md-2 form-control-label">Email</label>
                                             <div class="col-md-9">
-                                                <input name="email" required type="text" placeholder="Insert email" class="form-control" />
+                                                <?php
+                                                if (isset($_SESSION["email"])) {
+                                                    $email = $_SESSION["email"];
+                                                    $_SESSION["email"] = null;
+
+                                                    echo "<input name=\"email\" required type=\"text\" placeholder=\"Insert email\" class=\"form-control\" value=\"$email\" />";
+                                                } else {
+                                                    echo "<input name=\"email\" required type=\"text\" placeholder=\"Insert email\" class=\"form-control\" />";
+                                                }
+                                                ?>
                                             </div>
                                         </div>
 
@@ -82,16 +109,26 @@ if (!isset($_SESSION["user"])) {
                                             <label class="col-md-2 form-control-label">Branch</label>
                                             <div class="col-md-9 select mb-3">
                                                 <select name="cp" id="cp" class="form-control">
-                                                    <?php 
-                                                    // Get all waste type data from database
+                                                    <?php
+                                                    // Get all collection point from database
                                                     $items = Collection_Point::all();
-    
-                                                    foreach($items as $item){
+                                                    $branch_id = "";
+
+                                                    if (isset($_SESSION["branch_id"])) {
+                                                        $branch_id = $_SESSION["branch_id"];
+                                                        $_SESSION["branch_id"] = null;
+                                                    }
+
+                                                    foreach ($items as $item) {
                                                         $item_id = $item->get_id();
                                                         $item_name = $item->get_name();
                                                         $item_state = $item->get_state();
 
-                                                        echo "<option value=\"".$item_id."\">".$item_state." - ".$item_name."</option>";
+                                                        if($item_id == $branch_id){
+                                                            echo "<option value=\"" . $item_id . "\" selected>" . $item_state . " - " . $item_name . "</option>";
+                                                        } else {
+                                                            echo "<option value=\"" . $item_id . "\">" . $item_state . " - " . $item_name . "</option>";
+                                                        }
                                                     }
                                                     ?>
                                                 </select>
@@ -101,7 +138,16 @@ if (!isset($_SESSION["user"])) {
                                         <div class="form-group row">
                                             <label class="col-md-2 form-control-label">Username</label>
                                             <div class="col-md-9">
-                                                <input name="username" required type="text" placeholder="Insert username" class="form-control" />
+                                                <?php
+                                                if (isset($_SESSION["username"])) {
+                                                    $username = $_SESSION["username"];
+                                                    $_SESSION["username"] = null;
+
+                                                    echo "<input name=\"username\" required type=\"text\" placeholder=\"Insert username\" class=\"form-control\" value=\"$username\" />";
+                                                } else {
+                                                    echo "<input name=\"username\" required type=\"text\" placeholder=\"Insert username\" class=\"form-control\" />";
+                                                }
+                                                ?>
                                             </div>
                                         </div>
 
@@ -109,8 +155,24 @@ if (!isset($_SESSION["user"])) {
                                             <label class="col-md-2 form-control-label">Staff Type</label>
                                             <div class="col-md-9 select mb-3">
                                                 <select name="type" id="type" class="form-control">
-                                                    <option value="Normal" selected>Normal</option>
-                                                    <option value="Admin">Admin</option>
+                                                    <?php
+                                                    if (isset($_SESSION["type"])) {
+                                                        $type = $_SESSION["type"];
+                                                        $_SESSION["type"] = null;
+
+                                                        $type_options = array("Normal", "Admin");
+                                                        foreach ($type_options as $type_option) {
+                                                            if ($type_option == $type) {
+                                                                echo "<option value=\"$type_option\" selected>$type_option</option>";
+                                                            } else {
+                                                                echo "<option value=\"$type_option\">$type_option</option>";
+                                                            }
+                                                        }
+                                                    } else {
+                                                        echo "<option value=\"Normal\">Normal</option>";
+                                                        echo "<option value=\"Admin\">Admin</option>";
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
