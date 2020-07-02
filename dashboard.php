@@ -1,63 +1,57 @@
 <!DOCTYPE html>
-<?php 
-  session_start();
-  require_once './database.php';
-  if (!isset($_SESSION["user"]))
-  {
-    echo "<script type='text/javascript'>location.href = 'login.php';</script>";
-  }
-  else
-  {
-    $user = $_SESSION["user"];
-  }
+<?php
+session_start();
+require_once './database.php';
+if (!isset($_SESSION["user"])) {
+  echo "<script type='text/javascript'>location.href = 'login.php';</script>";
+} else {
+  $user = $_SESSION["user"];
+}
 ?>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Dashboard</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="all,follow" />
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
-    <!-- Font Awesome CSS-->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-      crossorigin="anonymous"
-    />
-    <!-- Google fonts - Popppins for copy-->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Poppins:300,400,800"
-    />
-    <!-- orion icons-->
-    <link rel="stylesheet" href="css/orionicons.css" />
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet" />
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css" />
-    <!-- Canvasjs-->
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.png?3" />
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Dashboard</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="all,follow" />
+  <!-- Bootstrap CSS-->
+  <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+  <!-- Font Awesome CSS-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+  <!-- Google fonts - Popppins for copy-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800" />
+  <!-- orion icons-->
+  <link rel="stylesheet" href="css/orionicons.css" />
+  <!-- theme stylesheet-->
+  <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet" />
+  <!-- Custom stylesheet - for your changes-->
+  <link rel="stylesheet" href="css/custom.css" />
+  <!-- Canvasjs-->
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!-- Favicon-->
+  <link rel="shortcut icon" href="img/favicon.png?3" />
+  <!-- Tweaks for older IEs-->
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script
     ><![endif]-->
-  </head>
-  <?php
+</head>
+<?php
+
+$staff_data = Staff::find("id=" . $user);
+$cp_id = $staff_data->get_cp_id();
+
 $servername   = "localhost";
 $username   = "root";
-$password   = "";
-$databasename = "wastemanagement";
+$password   = "test";
+$databasename = "waste";
 
 $DBConn   = new mysqli($servername, $username, $password, $databasename);
 
-$sql = "SELECT * FROM bin a, transaction_bin b WHERE a.type_id = b.bin_id AND a.cp_id = 1";
+$sql = "SELECT * FROM bin a, transaction_bin b WHERE a.type_id = b.bin_id AND a.cp_id = $cp_id";
 $result = $DBConn->query($sql);
 $count = mysqli_num_rows($result);
 
@@ -91,7 +85,7 @@ while ($row = $result->fetch_assoc()) {
   }
 }
 
-$sql1 = "SELECT * FROM bin WHERE cp_id = 1";
+$sql1 = "SELECT * FROM bin WHERE cp_id = $cp_id";
 $result1 = $DBConn->query($sql1);
 $count1 = mysqli_num_rows($result1);
 
@@ -353,16 +347,17 @@ while ($row1 = $result1->fetch_assoc()) {
 
   }
 </script>
-  <body>
-    <!-- navbar-->
-    <?php include("header.php"); ?>
-    <div class="d-flex align-items-stretch">
-      <!-- keep coding inside this tag. it stretches-->
-      <!-- sidebar-->
-      <?php include("sidebar.php"); ?>
-      <div class="page-holder w-100 d-flex flex-wrap">
-        <div class="container-fluid px-xl-5">
-          <section class="py-5">
+
+<body>
+  <!-- navbar-->
+  <?php include("header.php"); ?>
+  <div class="d-flex align-items-stretch">
+    <!-- keep coding inside this tag. it stretches-->
+    <!-- sidebar-->
+    <?php include("sidebar.php"); ?>
+    <div class="page-holder w-100 d-flex flex-wrap">
+      <div class="container-fluid px-xl-5">
+        <section class="py-5">
           <div class="row">
             <div class="col-xl-3 col-lg-6 mb-4 mb-xl-0">
               <div class="bg-white shadow roundy p-4 h-100 d-flex align-items-center justify-content-between">
@@ -486,58 +481,13 @@ while ($row1 = $result1->fetch_assoc()) {
             </div>
           </div>
         </section>
-          <section class="py-5">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card mb-5 mb-lg-0">         
-                  <div class="card-header">
-                    <h2 class="h6 mb-0 text-uppercase">Transaction history</h2>
-                  </div>
-                  <div class="card-body">
-                    <table class="table table-striped table-hover card-text" id="transaction_table">
-                              <thead>
-                                <tr>
-                                  <th>ID</th>
-                                  <th>Date</th>
-                                  <th>Time</th>
-                                  <th>Customer Name</th>
-                                  <th>Customer Mobile No</th>
-                                  <th>Customer Email</th>
-                                  <th>Managed By</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th scope="row">1</th>
-                                  <td>16 Jun 2020</td>
-                                  <td>08:32:00</td>
-                                  <td>Chin Zhen Yu</td>
-                                  <td>012-3456789</td>
-                                  <td>chinzhenyu97@gmail.conm</td>
-                                  <td>Mohammad Ahmad bin Mohammad Mutu</td>
-                                </tr>
-                                <tr>
-                                  <th scope="row">2</th>
-                                  <td>16 Jun 2020</td>
-                                  <td>10:45:12</td>
-                                  <td>Wan Nurwani binti Siti Rosella</td>
-                                  <td>012-3456789</td>
-                                  <td>chinzhenyu97@gmail.conm</td>
-                                  <td>Yap Li Feng</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-        <!-- footer-->
-        <?php include("footer.php"); ?>
       </div>
+      <!-- footer-->
+      <?php include("footer.php"); ?>
     </div>
-    <!-- JavaScript files-->
-    <?php include("javascript.php"); ?>
-  </body>
+  </div>
+  <!-- JavaScript files-->
+  <?php include("javascript.php"); ?>
+</body>
+
 </html>
