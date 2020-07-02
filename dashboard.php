@@ -364,7 +364,7 @@ while ($row1 = $result1->fetch_assoc()) {
                 <div class="flex-grow-1 d-flex align-items-center">
                   <div class="dot mr-3 bg-violet"></div>
                   <div class="text">
-                    <h6 class="mb-0">Paper</h6><span class="text-gray"><?php echo $paper ?> kg</span>
+                    <h6 class="mb-0">Paper</h6><span class="text-gray"><?php echo $paper1?> kg</span>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -377,7 +377,7 @@ while ($row1 = $result1->fetch_assoc()) {
                 <div class="flex-grow-1 d-flex align-items-center">
                   <div class="dot mr-3 bg-green"></div>
                   <div class="text">
-                    <h6 class="mb-0">Glass</h6><span class="text-gray"><?php echo $glass ?> kg</span>
+                    <h6 class="mb-0">Glass</h6><span class="text-gray"><?php echo $glass1 ?> kg</span>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -390,7 +390,7 @@ while ($row1 = $result1->fetch_assoc()) {
                 <div class="flex-grow-1 d-flex align-items-center">
                   <div class="dot mr-3 bg-blue"></div>
                   <div class="text">
-                    <h6 class="mb-0">Metal</h6><span class="text-gray"><?php echo $metal ?> kg</span>
+                    <h6 class="mb-0">Metal</h6><span class="text-gray"><?php echo $metal1 ?> kg</span>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -403,7 +403,7 @@ while ($row1 = $result1->fetch_assoc()) {
                 <div class="flex-grow-1 d-flex align-items-center">
                   <div class="dot mr-3 bg-red"></div>
                   <div class="text">
-                    <h6 class="mb-0">Plastic</h6><span class="text-gray"><?php echo $plastic ?> kg</span>
+                    <h6 class="mb-0">Plastic</h6><span class="text-gray"><?php echo $plastic1 ?> kg</span>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -419,7 +419,7 @@ while ($row1 = $result1->fetch_assoc()) {
                 <div class="flex-grow-1 d-flex align-items-center">
                   <div class="dot mr-3 bg-violet"></div>
                   <div class="text">
-                    <h6 class="mb-0">Fabric</h6><span class="text-gray"><?php echo $fabric ?> kg</span>
+                    <h6 class="mb-0">Fabric</h6><span class="text-gray"><?php echo $fabric1 ?> kg</span>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -432,7 +432,7 @@ while ($row1 = $result1->fetch_assoc()) {
                 <div class="flex-grow-1 d-flex align-items-center">
                   <div class="dot mr-3 bg-green"></div>
                   <div class="text">
-                    <h6 class="mb-0">Chemical</h6><span class="text-gray"><?php echo $chemical ?> kg</span>
+                    <h6 class="mb-0">Chemical</h6><span class="text-gray"><?php echo $chemical1 ?> kg</span>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -445,11 +445,11 @@ while ($row1 = $result1->fetch_assoc()) {
                 <div class="flex-grow-1 d-flex align-items-center">
                   <div class="dot mr-3 bg-blue"></div>
                   <div class="text">
-                    <h6 class="mb-0">Electric & Electronic</h6><span class="text-gray"><?php echo $electric ?> kg</span>
+                    <h6 class="mb-0">Electric & Electronic</h6><span class="text-gray"><?php echo $electric1 ?> kg</span>
                   </div>
                 </div>
                 <div class="col-sm-8">
-                  <div id="electric" style="height: 300px; width: 100%;"><span class="text-gray"><?php echo $electric ?> kg</span></div>
+                  <div id="electric" style="height: 300px; width: 100%;"></div>
                 </div>
               </div>
             </div>
@@ -458,7 +458,7 @@ while ($row1 = $result1->fetch_assoc()) {
                 <div class="flex-grow-1 d-flex align-items-center">
                   <div class="dot mr-3 bg-red"></div>
                   <div class="text">
-                    <h6 class="mb-0">Wood</h6><span class="text-gray"><?php echo $wood ?> kg</span>
+                    <h6 class="mb-0">Wood</h6><span class="text-gray"><?php echo $wood1 ?> kg</span>
                   </div>
                 </div>
                 <div class="col-sm-8">
