@@ -61,33 +61,33 @@ if (!isset($_SESSION["user"])) {
                     <div class="form-group row">
                       <label class="col-md-2 form-control-label">Name</label>
                       <div class="col-md-9">
-                        <input name="branch" required type="text" placeholder="Insert branch name" class="form-control" />
+                        <input name="branch" required type="text" placeholder="Insert branch name" class="form-control" required />
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-md-2 form-control-label">Address</label>
                       <div class="col-md-9">
-                        <input name="address" required type="text" placeholder="Insert address" class="form-control" />
+                        <input name="address" required type="text" placeholder="Insert address" class="form-control" required />
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-md-2 form-control-label">Phone No.</label>
                       <div class="col-md-9">
-                        <input name="phone" required type="text" placeholder="Insert phone no" class="form-control" />
+                        <input name="phone" required type="text" placeholder="Insert phone no" class="form-control" required />
                       </div>
                     </div>
 
                     <div class="form-group row">
                       <label class="col-md-2 form-control-label">Fax No.</label>
                       <div class="col-md-9">
-                        <input name="fax" type="text" placeholder="Insert fax no." class="form-control" />
+                        <input name="fax" type="text" placeholder="Insert fax no." class="form-control" required />
                       </div>
                     </div>
 
                     <div class="form-group row">
                       <label class="col-md-2 form-control-label">Social Media Tag</label>
                       <div class="col-md-9">
-                        <input type="text" required name="socmed" required placeholder="Insert @" class="form-control" />
+                        <input type="text" required name="socmed" required placeholder="Insert @" class="form-control" required />
                       </div>
                     </div>
 
