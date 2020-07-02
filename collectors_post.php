@@ -4,22 +4,16 @@ session_start();
 require_once './database.php';
 
 if (isset($_POST["submit"])) {
-    $type = $_POST["id"];
+    $type_id = $_POST["id"];
     $staff_id = $_POST["staff_id"];
     $cp_id = $_POST["cp_id"];
 
-    $servername   = "localhost";
-    $username   = "root";
-    $password   = "test";
-    $databasename = "waste";
-
-    $DBConn   = new mysqli($servername, $username, $password, $databasename);
-
-    $sql = "UPDATE `bin` SET capacity_current = '0.000' WHERE type_id = '" . $type . "' AND cp_id = $cp_id";
-    $result = $DBConn->query($sql);
+    $bins = Bin::where("cp_id=".$cp_id." and type_id=".$type_id);
+    $bins[0]->set_capacity_current(0.000);
+    $bins[0]->save();
 
     echo "<script type='text/javascript'>alert(\"Bin Cleared\")</script>";
-    // echo "<script type='text/javascript'>location.href = 'collectors.php';</script>";
+    echo "<script type='text/javascript'>location.href = 'collectors.php';</script>";
 }
 else{
     

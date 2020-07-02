@@ -182,7 +182,7 @@ while ($row1 = $result1->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -203,7 +203,7 @@ while ($row1 = $result1->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -224,7 +224,7 @@ while ($row1 = $result1->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -245,7 +245,7 @@ while ($row1 = $result1->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -266,7 +266,7 @@ while ($row1 = $result1->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -287,7 +287,7 @@ while ($row1 = $result1->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -308,12 +308,12 @@ while ($row1 = $result1->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
             y: <?php echo ($electric1 * 100) / 100 ?>,
-            label: "Electric & Electronic"
+            label: "E & E"
           },
           {
             y: <?php echo (100 - ($electric1 * 100) / 100) ?>,
@@ -329,7 +329,7 @@ while ($row1 = $result1->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -476,7 +476,7 @@ while ($row1 = $result1->fetch_assoc()) {
             <div class="card-body">
               <p class="text-gray">Total waste collected since establishment</p>
               <div class="chart-holder">
-                <div id="barchart" style="height: 300px; width: 100%;"></div>
+                <div id="barchart" style="height: 300px; width: 90%;"></div>
               </div>
             </div>
           </div>

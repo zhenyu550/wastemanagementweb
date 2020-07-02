@@ -93,7 +93,7 @@ while ($row = $result->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -114,7 +114,7 @@ while ($row = $result->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -135,7 +135,7 @@ while ($row = $result->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -156,7 +156,7 @@ while ($row = $result->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -177,7 +177,7 @@ while ($row = $result->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -198,7 +198,7 @@ while ($row = $result->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
@@ -219,12 +219,12 @@ while ($row = $result->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
             y: <?php echo ($electric * 100) / 100 ?>,
-            label: "Electric & Electronic"
+            label: "E & E"
           },
           {
             y: <?php echo (100 - ($electric * 100) / 100) ?>,
@@ -240,7 +240,7 @@ while ($row = $result->fetch_assoc()) {
         type: "doughnut",
         startAngle: 60,
         //innerRadius: 60,
-        indexLabelFontSize: 17,
+        indexLabelFontSize: 12,
         indexLabel: "{label} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [{
