@@ -271,9 +271,10 @@ while ($row = $result->fetch_assoc()) {
                   <div class="dot mr-3 bg-violet"></div>
                   <div class="text">
                     <h6 class="mb-0">Paper</h6><span class="text-gray"><?php echo $paper ?> kg</span>
-                    <br />
                     <form action="collectors_post.php" method="post">
-                      <input type="submit" class="btn btn-secondary" value="Clear" id="1"></input>
+                      <input type="submit" class="btn btn-secondary" name="Clear" value="Clear" id="1" />
+                      <input type="hidden" name="id" value="1">
+                    </form>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -287,7 +288,10 @@ while ($row = $result->fetch_assoc()) {
                   <div class="dot mr-3 bg-green"></div>
                   <div class="text">
                     <h6 class="mb-0">Glass</h6><span class="text-gray"><?php echo $glass ?> kg</span>
-                    <br /> <input type="submit" class="btn btn-secondary" value="Clear" id="2"></input>
+                   <form action="collectors_post.php" method="post">
+                      <br /> <input type="submit" class="btn btn-secondary" name="Clear" value="Clear" id="2"></input>
+                      <input type="hidden" name="id" value="2">
+                    </form>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -315,7 +319,10 @@ while ($row = $result->fetch_assoc()) {
                   <div class="dot mr-3 bg-red"></div>
                   <div class="text">
                     <h6 class="mb-0">Plastic</h6><span class="text-gray"><?php echo $plastic ?> kg</span>
-                    <br /> <input type="submit" class="btn btn-secondary" value="Clear" id="4"></input>
+                    <form action="collectors_post.php" method="post">
+                      <br /> <input type="submit" class="btn btn-secondary" name="Clear" value="Clear" id="4"></input>
+                      <input type="hidden" name="id" value="4">
+                    </form>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -332,7 +339,10 @@ while ($row = $result->fetch_assoc()) {
                   <div class="dot mr-3 bg-violet"></div>
                   <div class="text">
                     <h6 class="mb-0">Fabric</h6><span class="text-gray"><?php echo $fabric ?> kg</span>
-                    <br /> <input type="submit" class="btn btn-secondary" value="Clear" id="5"></input>
+                    <form action="collectors_post.php" method="post">
+                      <br /> <input type="submit" class="btn btn-secondary" name="Clear" value="Clear" id="5"></input>
+                      <input type="hidden" name="id" value="5">
+                    </form>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -346,7 +356,10 @@ while ($row = $result->fetch_assoc()) {
                   <div class="dot mr-3 bg-green"></div>
                   <div class="text">
                     <h6 class="mb-0">Chemical</h6><span class="text-gray"><?php echo $chemical ?> kg</span>
-                    <br /> <input type="submit" class="btn btn-secondary" value="Clear" id="6"></input>
+                    <form action="collectors_post.php" method="post">
+                      <br /> <input type="submit" class="btn btn-secondary" name="Clear" value="Clear" id="6"></input>
+                      <input type="hidden" name="id" value="6">
+                    </form>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -360,7 +373,10 @@ while ($row = $result->fetch_assoc()) {
                   <div class="dot mr-3 bg-blue"></div>
                   <div class="text">
                     <h6 class="mb-0">Electric & Electronic</h6><span class="text-gray"><?php echo $electric ?> kg</span>
-                    <br /> <input type="submit" class="btn btn-secondary" value="Clear" id="7"></input>
+                    <form action="collectors_post.php" method="post">
+                      <br /> <input type="submit" class="btn btn-secondary" name="Clear" value="Clear" id="7"></input>
+                      <input type="hidden" name="id" value="7">
+                    </form>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -374,7 +390,9 @@ while ($row = $result->fetch_assoc()) {
                   <div class="dot mr-3 bg-red"></div>
                   <div class="text">
                     <h6 class="mb-0">Wood</h6><span class="text-gray"><?php echo $wood ?> kg</span>
-                    <br /> <input type="submit" class="btn btn-secondary" value="Clear" id="8"></input>
+                    <form action="collectors_post.php" method="post">
+                      <br /> <input type="submit" class="btn btn-secondary" name="Clear" value="Clear" id="8"></input>
+                      <input type="hidden" name="id" value="8">
                     </form>
                   </div>
                 </div>
