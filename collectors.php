@@ -277,7 +277,6 @@ while ($row = $result->fetch_assoc()) {
                   <div class="dot mr-3 bg-violet"></div>
                   <div class="text">
                     <h6 class="mb-0">Paper</h6><span class="text-gray"><?php echo $paper ?> kg</span>
-                    <br />
                     <form action="collectors_post.php" method="post">
                       <input type="submit" class="btn btn-secondary" name="submit" value="Clear"></input>
                       <input type="hidden" class="btn btn-secondary" name="id" value="1"></input>

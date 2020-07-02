@@ -80,7 +80,7 @@ if (!isset($_SESSION["user"])) {
                     <div class="form-group row">
                       <label class="col-md-2 form-control-label">Fax No.</label>
                       <div class="col-md-9">
-                        <input name="fax" type="text" placeholder="Insert fax no." class="form-control" required />
+                        <input name="fax" type="text" placeholder="Insert fax no." class="form-control" />
                       </div>
                     </div>
 

@@ -61,19 +61,19 @@ if (!isset($_SESSION["user"])) {
                                         <div class="form-group row">
                                             <label class="col-md-2 form-control-label">Name</label>
                                             <div class="col-md-9">
-                                                <input name="name" required type="text" placeholder="Insert branch name" class="form-control" />
+                                                <input name="name" required type="text" placeholder="Insert branch name" class="form-control" required/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 form-control-label">Address</label>
                                             <div class="col-md-9">
-                                                <input name="address" required type="text" placeholder="Insert address" class="form-control" />
+                                                <input name="address" required type="text" placeholder="Insert address" class="form-control" required/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-2 form-control-label">Phone No.</label>
                                             <div class="col-md-9">
-                                                <input name="phone" required type="text" placeholder="Insert phone no" class="form-control" />
+                                                <input name="phone" required type="text" placeholder="Insert phone no" class="form-control" required/>
                                             </div>
                                         </div>
 
