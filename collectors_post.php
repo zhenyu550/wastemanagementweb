@@ -15,7 +15,6 @@ if (isset($_POST["submit"])) {
 
     $sql = "UPDATE `bin` SET capacity_current = '0.000' WHERE type_id = '" . $type . "' AND cp_id = '1'";
     $result = $DBConn->query($sql);
-    $count = mysqli_num_rows($result);
 
     echo "<script type='text/javascript'>alert(\"Transaction Saved\")</script>";
     echo "<script type='text/javascript'>location.href = 'collectors.php';</script>";
